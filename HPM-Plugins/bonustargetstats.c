@@ -1,10 +1,32 @@
-//Stats - Plugin
-//by Normynator
-//Beta Version
-//Ignore ShowWarning since its used for debugging
-//Ignore comments in beta version
-//Ignore coding styl during beta
-//Triggers by using script bonus3 99,X,X,X;
+//===== Hercules Plugin ======================================
+//= bonus3 bAtkEnemyStat
+//===== By: ==================================================
+//= Normynator/Hercules
+//===== Current Version: =====================================
+//= 1.0
+//===== Description: =========================================
+//= Will increase Damage by z% if Enemy Stat is >= y 
+//===== Additional Comments: =================================
+//= Format:
+//=
+//= STR = 1
+//= AGI = 2
+//= VIT = 3
+//= INT = 4
+//= DEX = 5
+//= LUK = 6
+//=
+//= bonus3 bAtkEnemyStat, x, y, z;	// x = Stat, y = Stat enemy must have, z = damage increase (10 = 10%);
+//= e.g:
+//=   bonus3 bAtkEnemyStat, 3, 50, 10; // Increase Damage by 10% if
+//=                                     enemy vit >= 50.
+//===== Repo Link: ===========================================
+//= 
+//===== Requested: ===========================================
+//= http://herc.ws/board/topic/14024-how-to-get-the-vit-of-an-enemy
+//===== Credits: =============================================
+//= Senpai Dastgir, for giving me inspiration
+//============================================================
 
 #include "common/hercules.h"
 
@@ -40,14 +62,22 @@ HPExport struct hplugin_info pinfo = {
 	HPM_VERSION,
 };
 
+/**
+*Max Bonus a player can receive.
+*/
 #define MAX_BONUS 10
+
+/**
+*Bonus ID
+*don't change
+*/
 int bAtkEnemyStat = -1;
 			
 struct stat_data_struct {
-	int stat[MAX_BONUS];
-	int rate[MAX_BONUS];
-	int increase[MAX_BONUS];
-	int size;
+	int stat[MAX_BONUS];		//Enemy stat
+	int rate[MAX_BONUS];		//How much?
+	int increase[MAX_BONUS];	//Bonus damage
+	int size;					//DO NOT TOUCH
 };
 
 int pc_bonus3_pre(struct map_session_data **sd, int *type, int *type2, int *type3, int *val)
@@ -55,6 +85,7 @@ int pc_bonus3_pre(struct map_session_data **sd, int *type, int *type2, int *type
 	struct stat_data_struct *data;
 	
 	if(*type == bAtkEnemyStat) {
+		//Init Array.
 		if(!(data = getFromMSD(*sd,0))){
 			CREATE(data,struct stat_data_struct,1);
 			data->stat[0] = *type2;
@@ -63,6 +94,7 @@ int pc_bonus3_pre(struct map_session_data **sd, int *type, int *type2, int *type
 			data->size = 1;
 			addToMSD(*sd,data,0,true);
 		}else{
+			//Fill Array.
 			int i = data->size;
 			if(i > MAX_BONUS){
 				ShowError("pc_bonus3_pre: MAX_BONUS reached!\n");
@@ -81,6 +113,7 @@ int pc_bonus3_pre(struct map_session_data **sd, int *type, int *type2, int *type
 
 int status_calc_pc_pre(struct map_session_data **sd, enum e_status_calc_opt *opt)
 {
+	//Clean up on recalc.
 	removeFromMSD(*sd,0);
 	return 1;
 }
@@ -98,6 +131,7 @@ int64 battle_calc_cardfix_post(int64 retVal, int attack_type, struct block_list 
 	int memincrease = 0;
 	
 	nullpo_ret(src);
+	nullpo_ret(target);
 	
 	sd = BL_CAST(BL_PC, src);
 	tstatus = status->get_status_data(target);
@@ -105,6 +139,7 @@ int64 battle_calc_cardfix_post(int64 retVal, int attack_type, struct block_list 
 	if(src->type != 1)
 		return retVal;
 		
+	//Read Array.
 	if((data = getFromMSD(sd,0))){
 		for(int i = 0; i < data->size; i++){
 			switch(data->stat[i]){
@@ -127,13 +162,15 @@ int64 battle_calc_cardfix_post(int64 retVal, int attack_type, struct block_list 
 					value = tstatus->luk;
 					break;
 				default:
-					value = 0;
+					value = -1;
+					ShowError("battle_calc_cardfix_post: Not existing Stat.\n");
 					break;
 			}
 			if(value >= data->rate[i])
 				memincrease += data->increase[i];
 		}
 	}
+	//Apply damage.
 	retVal += retVal * memincrease / 100;
 	return retVal;
 }
