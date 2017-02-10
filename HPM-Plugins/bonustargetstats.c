@@ -106,8 +106,10 @@ int pc_bonus3_pre(struct map_session_data **sd, int *type, int *type2, int *type
 			data->increase[i] = *val;
 			data->size = data->size + 1;
 		}
-	}
+		
 	hookStop();
+	}
+	
 	return 0;
 }
 
