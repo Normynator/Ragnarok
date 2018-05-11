@@ -1,0 +1,151 @@
+//===== rAthena Script =======================================
+//= Healer
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Basic healer script.
+//===== Additional Comments: =================================
+//= 1.0 Initial script.
+//= 1.1 Aligned coordinates with @go.
+//============================================================
+
+-	script	Healer	-1,{
+
+	.@Price = 0;	// Zeny required for heal
+	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
+	.@Delay = 1;	// Heal delay, in seconds
+
+	if (@HD > gettimetick(2))
+		end;
+	if (.@Price) {
+		message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",.@Price) + " Zeny.";
+		if (Zeny < .@Price)
+			end;
+		if (select("^0055FFHeal^000000:^777777Cancel^000000") == 2)
+			end;
+		Zeny -= .@Price;
+	}
+	if (.@Buffs) {
+    skilleffect 383,0; sc_start SC_WINDWALK,600000,5;
+    skilleffect 465,0; sc_start SC_KAITE,600000,7;
+    skilleffect 464,0; sc_start SC_KAUPE,600000,3;
+    skilleffect 463,0; sc_start SC_KAAHI,600000,7;
+    skilleffect 462,0; sc_start SC_KAIZEL,600000,7;
+    skilleffect 8,0; sc_start SC_ENDURE,600000,10;
+    skilleffect 33,0; sc_start SC_ANGELUS,600000,10;
+    skilleffect 45,0; sc_start SC_CONCENTRATION,600000,10;
+    skilleffect 74,0; sc_start SC_MAGNIFICAT,600000,5;
+    skilleffect 75,0; sc_start SC_GLORIA,600000,5;
+    skilleffect 459,0; sc_start SC_ADRENALINE2,600000,1;
+    skilleffect 66,0; sc_start SC_IMPOSITIO,600000,5;
+    skilleffect 67,0; sc_start SC_SUFFRAGIUM,600000,3;
+    skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+    skilleffect 29,0; sc_start SC_INC_AGI,600000,10;
+    skilleffect 112,0; sc_start SC_WEAPONPERFECT,600000,10;
+    skilleffect 113,0; sc_start SC_OVERTHRUST,600000,5;
+    skilleffect 114,0; sc_start SC_MAXIMIZEPOWER,600000,5;
+    skilleffect 357,0; sc_start SC_CONCENTRATION,600000,5;
+    skilleffect 355,0; sc_start SC_AURABLADE,600000,5;
+    sc_start SC_PROTECTWEAPON, 600000, 5;
+	  sc_start SC_PROTECTHELM, 600000, 5;
+    sc_start SC_PROTECTARMOR, 600000, 5;
+    sc_start SC_PROTECTSHIELD, 600000, 5;
+    sc_start SC_ATTHASTE_POTION2,1800000,6;
+    sc_start SC_FOOD_STR_CASH,600000,10;
+    sc_start SC_FOOD_AGI_CASH,600000,10;
+    sc_start SC_FOOD_VIT_CASH,600000,10;
+    sc_start SC_FOOD_INT_CASH,600000,10;
+    sc_start SC_FOOD_DEX_CASH,600000,10;
+    sc_start SC_FOOD_LUK_CASH,600000,10;
+    sc_start SC_BATKFOOD,600000,10;
+    sc_start SC_MATKFOOD,600000,10;
+    skilleffect 380,0; sc_start SC_TRUESIGHT,600000,5;
+    skilleffect 361,0; sc_start SC_ASSUMPTIO,600000,5;
+    sc_start SC_SOULLINK,600000,5; 
+	}
+	getinventorylist;
+	for(set .@i,0; .@i<@inventorylist_count; set .@i,.@i+1) {
+		if (@inventorylist_identify[.@i]) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+	}
+  percentheal 100,100;
+  repairall;
+  mes "[buffer]";
+  mes "Which weaponelement you want?";
+  switch(select("Earth","Wind","Water","Fire","Ghost","Shadow","Holy","Nothing")) {
+    case 1:
+      sc_start SC_PROPERTYGROUND,760000,0;
+      break;
+    case 2:
+      sc_start SC_PROPERTYWIND,760000,0;
+      break;
+    case 3:
+      sc_start SC_PROPERTYWATER,760000,0;
+      break;
+    case 4:
+      sc_start SC_PROPERTYFIRE,760000,0;
+      break;
+    case 5:
+      sc_start SC_PROPERTYTELEKINESIS,760000,0;
+      break;
+    case 6:
+      sc_start SC_PROPERTYDARK,760000,0;
+      break;
+    case 7:
+      sc_start SC_ASPERSIO,760000,0;
+      break;
+    case 8:
+      break;
+  }
+	if (.@Delay)
+		@HD = gettimetick(2) + .@Delay;
+	close;
+}
+
+
+// Duplicates
+//============================================================
+alberta,25,240,6	duplicate(Healer)	Healer#alb	4_F_FAIRY1
+aldebaran,135,118,6	duplicate(Healer)	Healer#alde	4_F_FAIRY1
+amatsu,200,79,4	duplicate(Healer)	Healer#ama	4_F_FAIRY1
+ayothaya,207,169,6	duplicate(Healer)	Healer#ayo	4_F_FAIRY1
+comodo,184,158,6	duplicate(Healer)	Healer#com	4_F_FAIRY1
+einbech,57,36,6	duplicate(Healer)	Healer#einbe	4_F_FAIRY1
+einbroch,57,202,6	duplicate(Healer)	Healer#einbr	4_F_FAIRY1
+geffen,115,72,6	duplicate(Healer)	Healer#gef	4_F_FAIRY1
+gonryun,156,122,6	duplicate(Healer)	Healer#gon	4_F_FAIRY1
+hugel,89,150,6	duplicate(Healer)	Healer#hug	4_F_FAIRY1
+izlude,121,150,6	duplicate(Healer)	Healer#izl	4_F_FAIRY1	//Pre-RE: (125,118)
+jawaii,250,139,4	duplicate(Healer)	Healer#jaw	4_F_FAIRY1
+lighthalzen,152,100,6	duplicate(Healer)	Healer#lhz	4_F_FAIRY1
+louyang,226,103,4	duplicate(Healer)	Healer#lou	4_F_FAIRY1
+manuk,272,144,6	duplicate(Healer)	Healer#man	4_F_FAIRY1
+mid_camp,203,289,6	duplicate(Healer)	Healer#mid	4_F_FAIRY1
+moc_ruins,72,164,4	duplicate(Healer)	Healer#moc	4_F_FAIRY1
+morocc,153,97,6	duplicate(Healer)	Healer#mor	4_F_FAIRY1
+moscovia,220,191,4	duplicate(Healer)	Healer#mos	4_F_FAIRY1
+niflheim,212,182,5	duplicate(Healer)	Healer#nif	4_F_FAIRY1
+payon,179,106,4	duplicate(Healer)	Healer#pay	4_F_FAIRY1
+prontera,162,193,4	duplicate(Healer)	Healer#prt	4_F_FAIRY1
+rachel,125,116,6	duplicate(Healer)	Healer#rac	4_F_FAIRY1
+splendide,201,153,4	duplicate(Healer)	Healer#spl	4_F_FAIRY1
+thor_camp,249,74,4	duplicate(Healer)	Healer#thor	4_F_FAIRY1
+umbala,105,148,3	duplicate(Healer)	Healer#umb	4_F_FAIRY1
+veins,217,121,4	duplicate(Healer)	Healer#ve	4_F_FAIRY1
+xmas,143,136,4	duplicate(Healer)	Healer#xmas	4_F_FAIRY1
+yuno,164,45,4	duplicate(Healer)	Healer#yuno	4_F_FAIRY1
+
+// Duplicates (Renewal)
+//============================================================
+brasilis,194,221,6	duplicate(Healer)	Healer#bra	4_F_FAIRY1
+dewata,195,187,4	duplicate(Healer)	Healer#dew	4_F_FAIRY1
+dicastes01,201,194,4	duplicate(Healer)	Healer#dic	4_F_FAIRY1
+ecl_in01,45,60,4	duplicate(Healer)	Healer#ecl	4_F_FAIRY1
+malangdo,132,114,6	duplicate(Healer)	Healer#mal	4_F_FAIRY1
+malaya,227,204,6	duplicate(Healer)	Healer#ma	4_F_FAIRY1
+mora,55,152,4	duplicate(Healer)	Healer#mora	4_F_FAIRY1

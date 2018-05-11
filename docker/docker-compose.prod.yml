@@ -1,0 +1,91 @@
+#PROD
+version: '3'
+
+services:
+  core:
+    build: ./server
+    image: core:latest
+    volumes:
+      - sql_scripts:/herc_server/sql-files
+
+  database:
+    image: mysql
+    restart: always
+    volumes:
+      - sql_scripts:/docker-entrypoint-initdb.d
+      - server_db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ragnarok
+      MYSQL_USER: ragnarok
+      MYSQL_PASSWORD: raganarok
+      MYSQL_ROOT_PASSWORD: secret
+    depends_on:
+      - core
+
+  map:
+    image: core
+    restart: always
+    command: ./wait-for-it.sh database:3306 -- "./map-server"
+    volumes:
+      - ./server/config/comm/main/import/map-server.conf:/herc_server/conf/import/map-server.conf:ro 
+    depends_on: 
+      - core
+      - database
+    ports:
+      - 5121:5121
+
+  login:
+    image: core
+    restart: always
+    command: ./wait-for-it.sh database:3306 -- "./login-server"
+    volumes:
+      - ./server/config/comm/main/import/login-server.conf:/herc_server/conf/import/login-server.conf:ro
+    depends_on: 
+      - core
+      - database
+    ports:
+      - 6900:6900
+
+  char:
+    image: core
+    restart: always
+    command: ./wait-for-it.sh database:3306 -- "./char-server"
+    volumes:
+      - ./server/config/comm/main/import/char-server.conf:/herc_server/conf/import/char-server.conf:ro
+    depends_on: 
+      - core
+      - database 
+    ports:
+      - 6121:6121
+  
+  flarum:
+    image: mondedie/docker-flarum:0.1.0-beta.7.1-stable
+    container_name: flarum
+    ports:
+      - 80:8888     
+    environment:
+      - DEBUG=true
+      - FORUM_URL=http://s8nozieb.me
+      - DB_PASS=secret2
+    volumes:
+      - ./forum/assests:/forum/app/assets
+      - ./forum/extensions:/flarum/app/extensions
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.1
+    container_name: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret2
+      - MYSQL_DATABASE=flarum
+      - MYSQL_USER=flarum
+      - MYSQL_PASSWORD=secret2
+    volumes:
+      - forum_db:/var/lib/mysql
+
+
+volumes:
+        sql_scripts:
+        server_db:
+        forum_db:

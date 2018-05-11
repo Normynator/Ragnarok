@@ -1,0 +1,63 @@
+#STAGE
+version: '3'
+
+services:
+  core:
+    build: ./server
+    image: core:latest
+    volumes:
+      - sql_scripts:/herc_server/sql-files
+
+  database:
+    image: mysql
+    restart: always
+    volumes:
+      - sql_scripts:/docker-entrypoint-initdb.d
+      - server_db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ragnarok
+      MYSQL_USER: ragnarok
+      MYSQL_PASSWORD: raganarok
+      MYSQL_ROOT_PASSWORD: secret
+    depends_on:
+      - core
+
+  map:
+    image: core
+    restart: always
+    command: ./wait-for-it.sh database:3306 -- "./map-server"
+    volumes:
+      - ./server/config/comm/main_dev/import/map-server.conf:/herc_server/conf/import/map-server.conf:ro 
+    depends_on: 
+      - core
+      - database
+    ports:
+      - 5122:5122
+
+  login:
+    image: core
+    restart: always
+    command: ./wait-for-it.sh database:3306 -- "./login-server"
+    volumes:
+      - ./server/config/comm/main_dev/import/login-server.conf:/herc_server/conf/import/login-server.conf:ro
+    depends_on: 
+      - core
+      - database
+    ports:
+      - 6901:6901
+
+  char:
+    image: core
+    restart: always
+    command: ./wait-for-it.sh database:3306 -- "./char-server"
+    volumes:
+      - ./server/config/comm/main_dev/import/char-server.conf:/herc_server/conf/import/char-server.conf:ro
+    depends_on: 
+      - core
+      - database 
+    ports:
+      - 6122:6122
+
+volumes:
+        sql_scripts:
+        server_db: 
