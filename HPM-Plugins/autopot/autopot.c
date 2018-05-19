@@ -156,7 +156,7 @@ void itemdb_readdb_additional_fields_pre(int *itemid, struct config_setting_t **
 	item = itemdb->array[*itemid];
 	if( item == NULL )
 		return;
-	
+		
 	//addToITEMDATA(item, data, 0, true);
 }
 
