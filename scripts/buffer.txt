@@ -1,9 +1,9 @@
 //===== rAthena Script =======================================
 //= Healer
 //===== By: ==================================================
-//= Euphy
+//= Euphy (this Version was modified by Normynator)
 //===== Current Version: =====================================
-//= 1.1
+//= 1.1.n
 //===== Compatible With: =====================================
 //= rAthena Project
 //===== Description: =========================================
@@ -11,6 +11,7 @@
 //===== Additional Comments: =================================
 //= 1.0 Initial script.
 //= 1.1 Aligned coordinates with @go.
+//= 1.1.n modified by Normynator
 //============================================================
 
 -	script	Healer	-1,{
