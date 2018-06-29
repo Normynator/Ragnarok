@@ -5,9 +5,9 @@
 //===== Current Version: =====================================
 //= 1.1.n
 //===== Compatible With: =====================================
-//= rAthena Project
+//= Hercules
 //===== Description: =========================================
-//= Basic healer script.
+//= Basic healer and buffer script.
 //===== Additional Comments: =================================
 //= 1.0 Initial script.
 //= 1.1 Aligned coordinates with @go.
