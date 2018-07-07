@@ -85,6 +85,7 @@ int discord_bot_recv_api(int fd) {
 	RFIFOFLUSH(fd);
 
 	ShowError("Received Message from '%s' (discord bridge)...\n", parse_string);
+	discord->send_chn(parse_string);
 	
 	aFree(parse_string);
 	return 0;
@@ -108,8 +109,9 @@ void discord_bot_send_api(char *str, bool force) {
 	WFIFOSET(discord->fd, len);
 }
 
-void discord_bot_send_channel() {
-	//TODO
+void discord_bot_send_channel(char *msg) {
+	snprintf(send_string, 150, "< %s > %s ", "Placeholder", msg);
+	clif->channel_msg2(discord->channel,send_string);
 }
 
 void discord_bot_recv_channel(struct map_session_data *sd, const char *msg) {
