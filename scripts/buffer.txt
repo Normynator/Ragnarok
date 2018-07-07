@@ -1,16 +1,17 @@
 //===== rAthena Script =======================================
 //= Healer
 //===== By: ==================================================
-//= Euphy
+//= Euphy (this Version was modified by Normynator)
 //===== Current Version: =====================================
-//= 1.1
+//= 1.1.n
 //===== Compatible With: =====================================
-//= rAthena Project
+//= Hercules
 //===== Description: =========================================
-//= Basic healer script.
+//= Basic healer and buffer script.
 //===== Additional Comments: =================================
 //= 1.0 Initial script.
 //= 1.1 Aligned coordinates with @go.
+//= 1.1.n modified by Normynator
 //============================================================
 
 -	script	Healer	-1,{
@@ -30,42 +31,42 @@
 		Zeny -= .@Price;
 	}
 	if (.@Buffs) {
-    skilleffect 383,0; sc_start SC_WINDWALK,600000,5;
-    skilleffect 465,0; sc_start SC_KAITE,600000,7;
-    skilleffect 464,0; sc_start SC_KAUPE,600000,3;
-    skilleffect 463,0; sc_start SC_KAAHI,600000,7;
-    skilleffect 462,0; sc_start SC_KAIZEL,600000,7;
-    skilleffect 8,0; sc_start SC_ENDURE,600000,10;
-    skilleffect 33,0; sc_start SC_ANGELUS,600000,10;
-    skilleffect 45,0; sc_start SC_CONCENTRATION,600000,10;
-    skilleffect 74,0; sc_start SC_MAGNIFICAT,600000,5;
-    skilleffect 75,0; sc_start SC_GLORIA,600000,5;
-    skilleffect 459,0; sc_start SC_ADRENALINE2,600000,1;
-    skilleffect 66,0; sc_start SC_IMPOSITIO,600000,5;
-    skilleffect 67,0; sc_start SC_SUFFRAGIUM,600000,3;
-    skilleffect 34,0; sc_start SC_BLESSING,600000,10;
-    skilleffect 29,0; sc_start SC_INC_AGI,600000,10;
-    skilleffect 112,0; sc_start SC_WEAPONPERFECT,600000,10;
-    skilleffect 113,0; sc_start SC_OVERTHRUST,600000,5;
-    skilleffect 114,0; sc_start SC_MAXIMIZEPOWER,600000,5;
-    skilleffect 357,0; sc_start SC_CONCENTRATION,600000,5;
-    skilleffect 355,0; sc_start SC_AURABLADE,600000,5;
-    sc_start SC_PROTECTWEAPON, 600000, 5;
-	  sc_start SC_PROTECTHELM, 600000, 5;
-    sc_start SC_PROTECTARMOR, 600000, 5;
-    sc_start SC_PROTECTSHIELD, 600000, 5;
-    sc_start SC_ATTHASTE_POTION2,1800000,6;
-    sc_start SC_FOOD_STR_CASH,600000,10;
-    sc_start SC_FOOD_AGI_CASH,600000,10;
-    sc_start SC_FOOD_VIT_CASH,600000,10;
-    sc_start SC_FOOD_INT_CASH,600000,10;
-    sc_start SC_FOOD_DEX_CASH,600000,10;
-    sc_start SC_FOOD_LUK_CASH,600000,10;
-    sc_start SC_BATKFOOD,600000,10;
-    sc_start SC_MATKFOOD,600000,10;
-    skilleffect 380,0; sc_start SC_TRUESIGHT,600000,5;
-    skilleffect 361,0; sc_start SC_ASSUMPTIO,600000,5;
-    sc_start SC_SOULLINK,600000,5; 
+    		skilleffect 383,0; sc_start SC_WINDWALK,600000,5;
+		skilleffect 465,0; sc_start SC_KAITE,600000,7;
+		skilleffect 464,0; sc_start SC_KAUPE,600000,3;
+		skilleffect 463,0; sc_start SC_KAAHI,600000,7;
+		skilleffect 462,0; sc_start SC_KAIZEL,600000,7;
+		skilleffect 8,0; sc_start SC_ENDURE,600000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,600000,10;
+		skilleffect 45,0; sc_start SC_CONCENTRATION,600000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,600000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,600000,5;
+		skilleffect 459,0; sc_start SC_ADRENALINE2,600000,1;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,600000,5;
+		skilleffect 67,0; sc_start SC_SUFFRAGIUM,600000,3;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INC_AGI,600000,10;
+		skilleffect 112,0; sc_start SC_WEAPONPERFECT,600000,10;
+		skilleffect 113,0; sc_start SC_OVERTHRUST,600000,5;
+		skilleffect 114,0; sc_start SC_MAXIMIZEPOWER,600000,5;
+		skilleffect 357,0; sc_start SC_CONCENTRATION,600000,5;
+		skilleffect 355,0; sc_start SC_AURABLADE,600000,5;
+		sc_start SC_PROTECTWEAPON, 600000, 5;
+		sc_start SC_PROTECTHELM, 600000, 5;
+		sc_start SC_PROTECTARMOR, 600000, 5;
+		sc_start SC_PROTECTSHIELD, 600000, 5;
+		sc_start SC_ATTHASTE_POTION2,1800000,6;
+		sc_start SC_FOOD_STR_CASH,600000,10;
+		sc_start SC_FOOD_AGI_CASH,600000,10;
+		sc_start SC_FOOD_VIT_CASH,600000,10;
+		sc_start SC_FOOD_INT_CASH,600000,10;
+		sc_start SC_FOOD_DEX_CASH,600000,10;
+		sc_start SC_FOOD_LUK_CASH,600000,10;
+		sc_start SC_BATKFOOD,600000,10;
+		sc_start SC_MATKFOOD,600000,10;
+		skilleffect 380,0; sc_start SC_TRUESIGHT,600000,5;
+		skilleffect 361,0; sc_start SC_ASSUMPTIO,600000,5;
+		sc_start SC_SOULLINK,600000,5; 
 	}
 	getinventorylist;
 	for(set .@i,0; .@i<@inventorylist_count; set .@i,.@i+1) {
@@ -73,35 +74,36 @@
 		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
 		getitem @inventorylist_id[.@i],1;
 	}
-  percentheal 100,100;
-  repairall;
-  mes "[buffer]";
-  mes "Which weaponelement you want?";
-  switch(select("Earth","Wind","Water","Fire","Ghost","Shadow","Holy","Nothing")) {
-    case 1:
-      sc_start SC_PROPERTYGROUND,760000,0;
-      break;
-    case 2:
-      sc_start SC_PROPERTYWIND,760000,0;
-      break;
-    case 3:
-      sc_start SC_PROPERTYWATER,760000,0;
-      break;
-    case 4:
-      sc_start SC_PROPERTYFIRE,760000,0;
-      break;
-    case 5:
-      sc_start SC_PROPERTYTELEKINESIS,760000,0;
-      break;
-    case 6:
-      sc_start SC_PROPERTYDARK,760000,0;
-      break;
-    case 7:
-      sc_start SC_ASPERSIO,760000,0;
-      break;
-    case 8:
-      break;
-  }
+	percentheal 100,100;
+	repairall;
+	mes "[buffer]";
+	mes "Which weaponelement you want?";
+	switch(select("Earth","Wind","Water","Fire","Ghost","Shadow","Holy","Nothing")) {
+		case 1:
+	        	sc_start SC_PROPERTYGROUND,760000,0;
+	      		break;
+	    	case 2:
+	      		sc_start SC_PROPERTYWIND,760000,0;
+	      		break;
+	    	case 3:
+	     		sc_start SC_PROPERTYWATER,760000,0;
+	      		break;
+	    	case 4:
+	      		sc_start SC_PROPERTYFIRE,760000,0;
+	      		break;
+	    	case 5:
+	      		sc_start SC_PROPERTYTELEKINESIS,760000,0;
+	      		break;
+	    	case 6:
+	      		sc_start SC_PROPERTYDARK,760000,0;
+	      		break;
+	    	case 7:
+	      		sc_start SC_ASPERSIO,760000,0;
+	      		break;
+	    	case 8:
+	      		break;
+	}
+	
 	if (.@Delay)
 		@HD = gettimetick(2) + .@Delay;
 	close;
