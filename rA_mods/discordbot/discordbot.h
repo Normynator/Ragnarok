@@ -48,10 +48,10 @@ struct discord_bot_interface {
     void (*send_chn) (char* msg);
 
     //DOC
-    int(*connect_timer) (int tid, int64 tick, int id, intptr_t data);
+    int(*connect_timer) (int tid, unsigned int tick, int id, intptr_t data);
 };
 
-int discord_connect_timer(int tid, int64 tick, int id, intptr_t data);
+int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data);
 void discord_bot_final(void);
 int discord_bot_recv_api(int fd);
 void discord_bot_send_api(char *str, bool force);
