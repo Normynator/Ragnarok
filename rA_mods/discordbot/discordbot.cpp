@@ -52,7 +52,7 @@ int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data) {
 		return -1;
 	}
 
-	if ((discord->fd = make_connection(discord->ip, 1337, 0, 0)) > 0) {
+	if ((discord->fd = make_connection(discord->ip, discord->port, 0, 0)) > 0) {
 		session[discord->fd]->func_parse = discord->recv_api;
 		session[discord->fd]->flag.server = 1;
 		discord->isOn = true;
@@ -90,7 +90,7 @@ int discord_bot_recv_api(int fd) {
 	return 0;
 }
 
-void discord_bot_send_api(char *str, bool force) {
+void discord_bot_send_api(const char *str, bool force) {
 	if (discord->isOn != true) {
 		return;
 	}
@@ -98,18 +98,18 @@ void discord_bot_send_api(char *str, bool force) {
 	size_t len;
 	nullpo_retv(str);
 
-	len = strlen(str) + 2;
-	if (len > DISCORD_MESSAGE_LENGTH - 3) {
-		len = DISCORD_MESSAGE_LENGTH - 3;
+	len = strlen(str);
+
+	if (len > DISCORD_MESSAGE_LENGTH - 1) {
+		len = DISCORD_MESSAGE_LENGTH - 1;
 	}
 
 	WFIFOHEAD(discord->fd, len);
-	sprintf(send_string, "%s\r\n", str);
-	memcpy(WFIFOP(discord->fd, 0), send_string, DISCORD_MESSAGE_LENGTH);
+	snprintf((char *)WFIFOP(discord->fd, 0), DISCORD_MESSAGE_LENGTH, str);
 	WFIFOSET(discord->fd, len);
 }	
 
-void discord_bot_send_channel(char *msg) {
+void discord_bot_send_channel(const char *msg) {
 	snprintf(send_string, 150, "< %s > %s ", "Placeholder", msg);
 	//TODO formating
 	clif_channel_msg(discord->channel, send_string, discord->channel->color);
@@ -117,8 +117,12 @@ void discord_bot_send_channel(char *msg) {
 
 void discord_bot_recv_channel(struct map_session_data *sd, const char *msg) {
 	nullpo_retv(sd);
-	sprintf(send_string, "< %s > : %s", sd->status.name, msg);
+	sprintf(send_string, "<%s>: %s", sd->status.name, msg);
 	discord->send_api(send_string, false);
+}
+
+void discord_bot_script_hook(const char *msg) {
+	discord->send_api(msg, false);
 }
 
 void discord_bot_hook(struct Channel *channel, struct map_session_data *sd, const char *msg) {

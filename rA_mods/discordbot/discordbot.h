@@ -40,7 +40,7 @@ struct discord_bot_interface {
 	/**
 	* Sends the message to Discord bridge
 	*/
-    void (*send_api) (char *str, bool force);
+    void (*send_api) (const char *str, bool force);
 
 	/**
 	* Parses message from ingame channel
@@ -50,7 +50,7 @@ struct discord_bot_interface {
 	/**
 	* Sends the message from recv_api to ingame channel
 	*/
-    void (*send_chn) (char* msg);
+    void (*send_chn) (const char* msg);
 
 	/**
 	* Inits a timer to receive messages from Discord bridge
@@ -59,6 +59,7 @@ struct discord_bot_interface {
 };
 
 void discord_bot_hook(struct Channel *channel, struct map_session_data *sd, const char *msg);
+void discord_bot_script_hook(const char *msg);
 void do_init_discord(void);
 void discord_bot_defaults(void);
 

@@ -1,0 +1,19 @@
+32c32
+< 
+---
+> #include "discordbot.h"
+24094a24095,24105
+> /** Send Mesasge to Discord Server
+> * 
+> */
+> BUILDIN_FUNC(discord) {
+> 	if (!script_hasdata(st, 2)) {
+> 		return SCRIPT_CMD_SUCCESS;
+> 	} 
+> 	discord_bot_script_hook(script_getstr(st, 2));
+> 	return SCRIPT_CMD_SUCCESS;
+> }
+> 
+24097a24109,24110
+> 	// Discord
+> 	BUILDIN_DEF(discord, "s*"),
