@@ -33,34 +33,33 @@ struct discord_bot_interface {
     void (*final) (void);
 
     /**
-     * Parser for the Discord API connection
-     * @see do_sockets
+     * Parser for the Discord bridge connection
      */
     int (*recv_api) (int fd);
 
-    //DOC
+	/**
+	* Sends the message to Discord bridge
+	*/
     void (*send_api) (char *str, bool force);
 
-    //DOC
+	/**
+	* Parses message from ingame channel
+	*/
     void (*recv_chn) (struct map_session_data *sd, const char *msg);
 
-    //DOC
+	/**
+	* Sends the message from recv_api to ingame channel
+	*/
     void (*send_chn) (char* msg);
 
-    //DOC
+	/**
+	* Inits a timer to receive messages from Discord bridge
+	*/
     int(*connect_timer) (int tid, unsigned int tick, int id, intptr_t data);
 };
 
-int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data);
-void discord_bot_final(void);
-int discord_bot_recv_api(int fd);
-void discord_bot_send_api(char *str, bool force);
-void discord_bot_send_channel(char *msg);
-void discord_bot_recv_channel(struct map_session_data *sd, const char *msg);
 void discord_bot_hook(struct Channel *channel, struct map_session_data *sd, const char *msg);
-
 void do_init_discord(void);
 void discord_bot_defaults(void);
-
 
 #endif //RATHENA_DISCORDBOT_H

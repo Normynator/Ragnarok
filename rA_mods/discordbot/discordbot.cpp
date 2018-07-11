@@ -9,7 +9,7 @@
 #include "../common/strlib.hpp"
 #include "../common/nullpo.hpp"
 #include "../common/timer.hpp"
-
+#include "../common/malloc.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,7 +37,7 @@ void discord_bot_init() {
 		ShowError("Unable to resolve %s (discord bridge)!", discord->ip_name);
 		return;
 	}
-	discord->channel = channel_create_simple("discord", NULL, CHAN_TYPE_PUBLIC, NULL);
+	discord->channel = channel_create_simple("#discord", NULL, CHAN_TYPE_PUBLIC, NULL);
 
 	discord->fails = 0;
 	discord->fd = 0;
@@ -63,13 +63,31 @@ int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data) {
 }
 
 void discord_bot_final() {
-    // TODO
-	// do some cleanup!
+	if (discord->isOn) {
+		discord->send_api("QUIT :Hercules is shutting down", true);
+		do_close(discord->fd);
+	}
+
+	if (discord->connect_timer) {
+		delete_timer(0, discord->connect_timer);
+	}
 }
 
 int discord_bot_recv_api(int fd) {
-	// TODO
-    return 0;
+	char *parse_string = NULL;
+
+	if (!RFIFOREST(fd))
+		return 0;
+
+	parse_string = (char *)aMalloc(RFIFOREST(fd));
+	memcpy(parse_string, RFIFOP(fd, 0), RFIFOREST(fd));
+	RFIFOSKIP(fd, RFIFOREST(fd));
+	RFIFOFLUSH(fd);
+
+	discord->send_chn(parse_string);
+
+	aFree(parse_string);
+	return 0;
 }
 
 void discord_bot_send_api(char *str, bool force) {
@@ -92,22 +110,22 @@ void discord_bot_send_api(char *str, bool force) {
 }	
 
 void discord_bot_send_channel(char *msg) {
-   // TODO
+	snprintf(send_string, 150, "< %s > %s ", "Placeholder", msg);
+	//TODO formating
+	clif_channel_msg(discord->channel, send_string, discord->channel->color);
 }
 
 void discord_bot_recv_channel(struct map_session_data *sd, const char *msg) {
 	nullpo_retv(sd);
-
 	sprintf(send_string, "< %s > : %s", sd->status.name, msg);
 	discord->send_api(send_string, false);
 }
 
 void discord_bot_hook(struct Channel *channel, struct map_session_data *sd, const char *msg) {
-	if (channel->name != "discord") {
+	if (strcmp(channel->name, "discord") != 0) {
 		return;
 	}
 	discord->recv_chn(sd, msg);
-	
 }
 
 void discord_bot_defaults(void) {
