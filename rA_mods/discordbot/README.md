@@ -44,4 +44,5 @@ Sends a message to discord.
 - Add manual reconnect to bridge.
 
 ## Working with:
+(This is updated once per month or upon a request)
 rev 042b886
