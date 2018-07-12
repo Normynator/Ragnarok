@@ -40,6 +40,8 @@ Sends a message to discord.
 ## TODO:
 - Remove \<Username\> palceholder.
 - Fix |00 message bug. (Currently fixed by a workarround)
+- Add auto reconnect to bridge.
+- Add manual reconnect to bridge.
 
 ## Working with:
 rev 042b886
