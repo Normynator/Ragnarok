@@ -29,7 +29,7 @@ Sends a message to discord.
 ```
 
 ## TODO
-- Remove <Username> palceholder.
+- Remove \<Username\> palceholder.
 - Fix |00 message bug. (Currently fixed by a workarround)
 
 ## Working with:
