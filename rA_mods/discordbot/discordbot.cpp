@@ -110,7 +110,7 @@ int discord_bot_recv_api(int fd) {
 	return 0;
 }
 
-void discord_bot_send_api(const char *str, bool force) {
+inline void discord_bot_send_api(const char *str, bool force) {
 	if (discord->isOn != true) {
 		return;
 	}
@@ -129,7 +129,7 @@ void discord_bot_send_api(const char *str, bool force) {
 	WFIFOSET(discord->fd, len);
 }	
 
-void discord_bot_send_channel(const char *msg) {
+inline void discord_bot_send_channel(const char *msg) {
 	//TODO formating
 	snprintf(send_string, 150, "%s <%s> : %s ", discord->channel->alias, "Username", msg);
 	clif_channel_msg(discord->channel, send_string, discord->channel->color);
