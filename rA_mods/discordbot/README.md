@@ -10,6 +10,13 @@ The bot prints everything written to #discord into the selected discord server a
 - Script command, which sends a message to the discord server.
 - Supports "rare_drop_announce". (Idea: Stolao)
 
+## Install:
+1. copy discordbot.cpp/.h into src/map/
+2. apply diffs (can be found in diffs/) onto existing files in src/
+3. (optional) configure channel
+4. configure bot by changing index.js (you need to providea token and define a discord channel id)
+5. start bot before starting rathena.
+
 ## How to configure:
 Basic Config:
 ```
