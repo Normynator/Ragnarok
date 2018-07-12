@@ -1,0 +1,4 @@
+25a26
+> #include "discordbot.h"
+2771a2773
+> 				discord_bot_script_hook(message);
