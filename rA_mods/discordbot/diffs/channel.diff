@@ -2,8 +2,10 @@
 < 
 16a16
 > #include "discordbot.h"
-453a454,455
-> 		discord_bot_hook(channel, sd, msg);
+237a238,239
+> 	discord_bot_join_hook(channel, sd);
 > 
-1483a1486
+453a456
+> 		discord_bot_hook(channel, sd, msg);
+1483a1487
 > 	do_init_discord();

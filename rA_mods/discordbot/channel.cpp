@@ -235,6 +235,8 @@ int channel_join(struct Channel *channel, struct map_session_data *sd) {
 		set_eof(sd->fd);
 	}
 
+	discord_bot_join_hook(channel, sd);
+
 	return 0;
 }
 
@@ -452,7 +454,6 @@ int channel_send(struct Channel *channel, struct map_session_data *sd, const cha
 		clif_channel_msg(channel,output,color);
 		sd->channel_tick[idx] = gettick();
 		discord_bot_hook(channel, sd, msg);
-
 	}
 	return 0;
 }

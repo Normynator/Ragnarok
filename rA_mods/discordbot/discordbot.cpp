@@ -20,6 +20,8 @@
 #include "../common/showmsg.hpp"
 #include "../common/socket.hpp"
 
+#define DEBUG
+
 struct discord_bot_interface discord_bot_s;
 struct discord_bot_interface *discord;
 
@@ -33,11 +35,29 @@ void do_init_discord() {
 }
 
 void discord_bot_init() {
+	struct Channel tmp_chn;
+	char* name = "#discord";
+	char* alias = "[Discord]";
+
+	memset(&tmp_chn, 0, sizeof(struct Channel));
+
 	if (!(discord->ip = host2ip(discord->ip_name))) {
 		ShowError("Unable to resolve %s (discord bridge)!", discord->ip_name);
 		return;
 	}
-	discord->channel = channel_create_simple("#discord", NULL, CHAN_TYPE_PUBLIC, NULL);
+	
+	safestrncpy(tmp_chn.name, name + 1, sizeof(tmp_chn.name));
+	safestrncpy(tmp_chn.alias, alias, sizeof(tmp_chn.alias));
+	tmp_chn.pass[0] = '\0';
+	tmp_chn.type = CHAN_TYPE_PUBLIC;
+	tmp_chn.color = channel_getColor("Blue");
+	tmp_chn.opt = CHAN_OPT_BASE;
+	tmp_chn.msg_delay = 1000;
+
+	discord->channel = channel_create(&tmp_chn);
+	if (discord->channel == NULL) {
+		ShowError("Discord: Channel creation failed!");
+	}
 
 	discord->fails = 0;
 	discord->fd = 0;
@@ -80,7 +100,7 @@ int discord_bot_recv_api(int fd) {
 		return 0;
 
 	parse_string = (char *)aMalloc(RFIFOREST(fd));
-	memcpy(parse_string, RFIFOP(fd, 0), RFIFOREST(fd));
+	safestrncpy(parse_string, (const char*)RFIFOP(fd, 0), RFIFOREST(fd));
 	RFIFOSKIP(fd, RFIFOREST(fd));
 	RFIFOFLUSH(fd);
 
@@ -110,15 +130,24 @@ void discord_bot_send_api(const char *str, bool force) {
 }	
 
 void discord_bot_send_channel(const char *msg) {
-	snprintf(send_string, 150, "< %s > %s ", "Placeholder", msg);
 	//TODO formating
+	snprintf(send_string, 150, "%s <%s> : %s ", discord->channel->alias, "Username", msg);
 	clif_channel_msg(discord->channel, send_string, discord->channel->color);
 }
 
 void discord_bot_recv_channel(struct map_session_data *sd, const char *msg) {
 	nullpo_retv(sd);
-	sprintf(send_string, "<%s>: %s", sd->status.name, msg);
+	snprintf(send_string, 150, "<%s>: %s", sd->status.name, msg);
 	discord->send_api(send_string, false);
+}
+
+void discord_bot_join_hook(struct Channel *channel, struct map_session_data *sd) {
+	if (strcmp(channel->name, "discord") != 0) {
+		return;
+	}
+	char output[CHAT_SIZE_MAX];
+	snprintf(output, CHAT_SIZE_MAX, "Welcome to %s.\nMessages from discord users are marked with <Username>!", discord->channel->alias);
+	clif_displaymessage(sd->fd, output);
 }
 
 void discord_bot_script_hook(const char *msg) {
@@ -129,7 +158,10 @@ void discord_bot_hook(struct Channel *channel, struct map_session_data *sd, cons
 	if (strcmp(channel->name, "discord") != 0) {
 		return;
 	}
-	discord->recv_chn(sd, msg);
+#ifdef DEBUG
+	ShowDebug("Discord: Received: %s , with len %d \n", &msg[3], strlen(msg));
+#endif
+	discord->recv_chn(sd, &msg[3]); // because all messages from channels start with |00 for an unknown reason.
 }
 
 void discord_bot_defaults(void) {

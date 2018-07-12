@@ -60,6 +60,7 @@ struct discord_bot_interface {
 
 void discord_bot_hook(struct Channel *channel, struct map_session_data *sd, const char *msg);
 void discord_bot_script_hook(const char *msg);
+void discord_bot_join_hook(struct Channel *channel, struct map_session_data *sd);
 void do_init_discord(void);
 void discord_bot_defaults(void);
 
