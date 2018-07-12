@@ -34,8 +34,10 @@ Command:
   discord(<string>);
 Sends a message to discord.
 ```
+## Ideas:
+- Multi channel support.
 
-## TODO
+## TODO:
 - Remove \<Username\> palceholder.
 - Fix |00 message bug. (Currently fixed by a workarround)
 
