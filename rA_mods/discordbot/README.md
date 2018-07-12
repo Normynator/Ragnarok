@@ -5,6 +5,10 @@ The bot prints everything written to #discord into the selected discord server a
 !!! This is a beta version, somethings might not work as intended and crashes could occure !!!
 (See todo or issues)
 
+Any bridge which implements a socket and a discord bot is fine for this.
+
+Provided in bridge/ is a python solution for debugging and a NodeJS solution (written by NOIL).
+
 ## Features:
 - Basic Discord to ingame channel and ingame channel to Discord.
 - Script command, which sends a message to the discord server.
