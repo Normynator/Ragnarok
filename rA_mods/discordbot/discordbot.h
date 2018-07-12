@@ -20,6 +20,7 @@ struct discord_bot_interface {
     unsigned short port;
     int64 last_try;
     unsigned char fails;
+	int connect_timer_id;
     struct Channel *channel;
 
     /**

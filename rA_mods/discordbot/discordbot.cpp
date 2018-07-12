@@ -42,7 +42,7 @@ void discord_bot_init() {
 	memset(&tmp_chn, 0, sizeof(struct Channel));
 
 	if (!(discord->ip = host2ip(discord->ip_name))) {
-		ShowError("Unable to resolve %s (discord bridge)!", discord->ip_name);
+		ShowError("Unable to resolve %s (discord bridge)!\n", discord->ip_name);
 		return;
 	}
 	
@@ -56,7 +56,7 @@ void discord_bot_init() {
 
 	discord->channel = channel_create(&tmp_chn);
 	if (discord->channel == NULL) {
-		ShowError("Discord: Channel creation failed!");
+		ShowError("Discord: Channel creation failed!\n");
 	}
 
 	discord->fails = 0;
@@ -64,12 +64,20 @@ void discord_bot_init() {
 	discord->isOn = false;
 
 	add_timer_func_list(discord->connect_timer, "discord_connect_timer");
-	add_timer(gettick() + 7000, discord->connect_timer, 0, 0);
+	discord->connect_timer_id = add_timer(gettick() + 7000, discord->connect_timer, 0, NULL);
 }
 
 int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data) {
-	if (discord->isOn || ++discord->fails >= 3) {
-		return -1;
+#ifdef DEBUG
+	ShowDebug("Calling discord_connect_timer\n");
+#endif
+	if (discord->isOn) {
+		return 0;
+	}
+
+	if (++discord->fails > 3) {
+		ShowError("Unable to restart bot, bridge seems down! Tried to reconnect %d times!", discord->fails);
+		return 0;
 	}
 
 	if ((discord->fd = make_connection(discord->ip, discord->port, 0, 0)) > 0) {
@@ -78,23 +86,30 @@ int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data) {
 		discord->isOn = true;
 		sprintf(send_string, "Login to Bridge!");
 		discord->send_api(send_string, true);
+	} else {
+		discord->connect_timer_id = add_timer(gettick() + 7000, discord->connect_timer, 0, NULL);
 	}
 	return 0;
 }
 
 void discord_bot_final() {
 	if (discord->isOn) {
-		discord->send_api("QUIT :Hercules is shutting down", true);
 		do_close(discord->fd);
 	}
-
-	if (discord->connect_timer) {
-		delete_timer(0, discord->connect_timer);
-	}
+	discord->fd = 0;
+	discord->isOn = false;
+	discord->fails = 0;
 }
 
 int discord_bot_recv_api(int fd) {
 	char *parse_string = NULL;
+
+	if (session[discord->fd]->flag.eof) {
+		ShowError("Connection from Bridge was closed!\n");
+		discord_bot_final(); // reset bot and try to reconnect.
+		discord->connect_timer_id = add_timer(gettick() + 7000, discord->connect_timer, 0, NULL);
+		return 0;
+	}
 
 	if (!RFIFOREST(fd))
 		return 0;
@@ -130,8 +145,7 @@ inline void discord_bot_send_api(const char *str, bool force) {
 }	
 
 inline void discord_bot_send_channel(const char *msg) {
-	//TODO formating
-	snprintf(send_string, 150, "%s <%s> : %s ", discord->channel->alias, "Username", msg);
+	snprintf(send_string, 150, " %s%s", discord->channel->alias, msg);
 	clif_channel_msg(discord->channel, send_string, discord->channel->color);
 }
 
@@ -179,4 +193,5 @@ void discord_bot_defaults(void) {
     discord->send_chn = discord_bot_send_channel;
     discord->recv_chn = discord_bot_recv_channel;
     discord->connect_timer = discord_connect_timer;
+	discord->connect_timer_id = INVALID_TIMER;
 }
