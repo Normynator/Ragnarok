@@ -76,7 +76,7 @@ int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data) {
 	}
 
 	if (++discord->fails > 3) {
-		ShowError("Unable to restart bot, bridge seems down! Tried to reconnect %d times!", discord->fails);
+		ShowError("Unable to restart bot, bridge seems down! Tried to reconnect %d times!\n", discord->fails-1);
 		return 0;
 	}
 
@@ -87,7 +87,7 @@ int discord_connect_timer(int tid, unsigned int tick, int id, intptr_t data) {
 		sprintf(send_string, "Login to Bridge!");
 		discord->send_api(send_string, true);
 	} else {
-		discord->connect_timer_id = add_timer(gettick() + 7000, discord->connect_timer, 0, NULL);
+		discord->connect_timer_id = add_timer(gettick() + 60000, discord->connect_timer, 0, NULL); //wait 60 seconds before reconnecting
 	}
 	return 0;
 }
@@ -107,7 +107,7 @@ int discord_bot_recv_api(int fd) {
 	if (session[discord->fd]->flag.eof) {
 		ShowError("Connection from Bridge was closed!\n");
 		discord_bot_final(); // reset bot and try to reconnect.
-		discord->connect_timer_id = add_timer(gettick() + 7000, discord->connect_timer, 0, NULL);
+		discord->connect_timer_id = add_timer(gettick() + 1000, discord->connect_timer, 0, NULL);
 		return 0;
 	}
 
