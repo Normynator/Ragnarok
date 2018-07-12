@@ -1,5 +1,5 @@
-# roDiscordBot for rAthena
-This bot communitcation between discord and ingame chat.
+# roCORD for rAthena
+Discord Bot for communication between discord and ingame channel.
 The bot prints everything written to #discord into the selected discord server and vice versa.
 
 !!! This is a beta version, somethings might not work as intended and crashes could occure !!!
