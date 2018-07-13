@@ -175,7 +175,11 @@ void discord_bot_hook(struct Channel *channel, struct map_session_data *sd, cons
 #ifdef DEBUG
 	ShowDebug("Discord: Received: %s , with len %d \n", &msg[3], strlen(msg));
 #endif
+#ifdef WIN32
 	discord->recv_chn(sd, &msg[3]); // because all messages from channels start with |00 for an unknown reason.
+#else
+	discord->recv_chn(sd, msg);
+#endif
 }
 
 void discord_bot_defaults(void) {
