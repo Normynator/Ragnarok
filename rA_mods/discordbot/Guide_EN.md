@@ -75,6 +75,16 @@ $ make server
 Make sure to have an updateted system and install nodejs and npm.
 ```console
 $ sudo apt-get update
-$ sudo apt-get install nodejs
 $ sudo apt-get install npm
+$ sudo apt-get install curl
+
+$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
+
+$ npm install -S discord.js
+
+$ mkdir bridge
+$ cd bridge
+
+$ cp ~/Ragnarok/rA_mods/discordbot/bridge/*.js* .
 ```
