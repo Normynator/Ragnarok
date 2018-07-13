@@ -77,6 +77,7 @@ Make sure to have an updateted system and install nodejs and npm.
 $ sudo apt-get update
 $ sudo apt-get install npm
 $ sudo apt-get install curl
+$ sudo apt-get install screen
 
 $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
@@ -130,4 +131,11 @@ $ vi index.js
 Now use Secret Token, Channel ID and Channel Name as shown in the picture. (Channel name without #)
 ![alt text](https://i.imgur.com/HXZsvOQ.png)
 
+```console
+$ screen
+$ node index.js
+```
 
+Than press Ctrl + A + D and start your rAthena server.
+
+Done!
