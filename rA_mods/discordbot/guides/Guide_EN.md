@@ -1,4 +1,5 @@
 # How to install roCORD
+Thanks for Vegas for providing a server setup for me!
 
 It is important to use a supported rAthena version else this could fail.
 If you have problems ask here or in rAthena forum and please provide an error log.
