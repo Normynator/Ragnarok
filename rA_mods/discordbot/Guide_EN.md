@@ -110,7 +110,7 @@ Now to give the bot some permission click on "Generate OAuth2 URL".
 
 Here you can choose the permissions for your bot and when your are done, go and copy that link!
 
-![alt text](https://i.imgur.com/LnpvzrW.png)
+![alt text](https://i.imgur.com/vI9Eakb.png)
 
 Follow your saved link and you'll be able to add your bot to a server!
 
