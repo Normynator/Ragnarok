@@ -72,6 +72,7 @@ $ make server
 
 
 ## BRIDGE PART
+Make sure to have an updateted system and install nodejs and npm.
 ```console
 $ sudo apt-get update
 $ sudo apt-get install nodejs
