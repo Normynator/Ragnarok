@@ -88,3 +88,27 @@ $ cd bridge
 
 $ cp ~/Ragnarok/rA_mods/discordbot/bridge/*.js* .
 ```
+
+## DISCORD PART
+
+To generate a discord bot you have to visit: https://discordapp.com/developers/applications/me
+
+BILD NEUE APP
+
+Click on new app to create a bot. Choose the name of your bot and continue.
+
+Next you have to scroll down to create an actual bot user.
+
+BILD BOT USER
+
+To get your token click on "click to reveal". You will need your token later (keep it secret).
+
+BILD CLICK TO REVEAL
+
+Now to give the bot some permission click on "Generate OAuth2 URL".
+
+Here you can choose the permissions for your bot and when your are done, go and copy that link!
+
+BILD auth2
+
+Follow your saved link and you'll be able to add your bot to a server! Done.
