@@ -111,4 +111,23 @@ Here you can choose the permissions for your bot and when your are done, go and 
 
 ![alt text](https://i.imgur.com/LnpvzrW.png)
 
-Follow your saved link and you'll be able to add your bot to a server! Done.
+Follow your saved link and you'll be able to add your bot to a server!
+
+As a last step you need to choose a channel and get it's ID.
+![alt text](https://i.imgur.com/hwXPTL9.png)
+Click on the last option: Copy ID.
+
+For the last step you will need the Channel ID and your secret token.
+
+## FINAL PART
+
+Go back to your server.
+
+```console
+$ vi index.js
+```
+
+Now use Secret Token, Channel ID and Channel Name as shown in the picture.
+![alt text](https://i.imgur.com/HXZsvOQ.png)
+
+
