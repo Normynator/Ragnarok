@@ -4,53 +4,76 @@ It is important to use a supported rAthena version else this could fail.
 If you have problems ask here or in rAthena forum and please provide an error log.
 
 ## SRC PART
-
+Go into your home directory.
+```console
 $ cd
+```
 
+Clone the repo.
+```console
 $ git clone https://github.com/Normynator/Ragnarok.git
+```
 
+Go to your rAthena installation. Replace /path/to/your/rathena with the path to your rAthena folder. And go into the src area.
+```console
 $ cd /path/to/your/rathena/
-
 $ cd src/map/
-
-// create backups
+```
+Create backups of the modified files in case something bad happens!
+```console
 $ cp channel.cpp channel.cpp.bk
 $ cp script.cpp script.cpp.bk
 $ cp mob.cpp mob.cpp.bk
+```
 
-//apply diffs
+Since we have backups no we don't need to worry about modifiying your src files and just apply the provided diffs.
+```console
 $ patch channel.cpp ~/Ragnarok/rA_mods/discordbot/diffs/channel.diff
 $ patch script.cpp ~/Ragnarok/rA_mods/discordbot/diffs/script.diff
 $ patch mob.cpp ~/Ragnarok/rA_mods/discordbot/diffs/mob.diff
+```
 
-//copy bot files
+src modification was done in the previous step. Now we are going to add the discordbot to our src files.
+```console
 $ cp ~/Ragnarok/rA_mods/discordbot/discordbot.h .
 $ cp ~/Ragnarok/rA_mods/discordbot/discordbot.cpp .
+```
 
-//go back to rA root
+src changes are finally done. Let's go back to the rAthena root folder.
+```console
 $ cd ../../
+```
 
-//check server is running
+First we need to check if the server is still running.
+```console
 $ ./athena-start status
-Ex Output:
+```
+If see this output you can go to "Recompile".
+```
 'login-server' seems to be down
 'char-server' seems to be down
 'map-server' seems to be down
+```
 
-If not:
+else stop your rAthena server.
+```console
 $ ./athena-start stop
+```
 
-//Recompile
+#### Recompile: 
+Now it's time to recompile your rAthena server.
+```console
 $ ./configure
 $ make server
-
+```
 (* if you have an compile ERROR post it in forum.*)
+
 (* you can ignore WARNINGS for now. *)
 
 
 ## BRIDGE PART
-
+```console
 $ sudo apt-get update
 $ sudo apt-get install nodejs
 $ sudo apt-get install npm
-
+```
