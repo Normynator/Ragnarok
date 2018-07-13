@@ -127,7 +127,7 @@ Go back to your server.
 $ vi index.js
 ```
 
-Now use Secret Token, Channel ID and Channel Name as shown in the picture.
+Now use Secret Token, Channel ID and Channel Name as shown in the picture. (Channel name without #)
 ![alt text](https://i.imgur.com/HXZsvOQ.png)
 
 
