@@ -88,8 +88,8 @@ $ cd bridge
 
 $ cp ~/Ragnarok/rA_mods/discordbot/bridge/*.js* .
 
-$ npm install -S discord.js
-
+$ npm install
+$ # Please ignore all "WARN" warnings for now!
 ```
 
 ## DISCORD PART
