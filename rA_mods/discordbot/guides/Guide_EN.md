@@ -83,12 +83,13 @@ $ sudo apt-get install screen
 $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 
-$ npm install -S discord.js
-
 $ mkdir bridge
 $ cd bridge
 
 $ cp ~/Ragnarok/rA_mods/discordbot/bridge/*.js* .
+
+$ npm install -S discord.js
+
 ```
 
 ## DISCORD PART
