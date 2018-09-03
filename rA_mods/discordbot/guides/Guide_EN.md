@@ -1,4 +1,5 @@
 # How to install roCORD
+Thanks Vegas for providing a server setup for me!
 
 It is important to use a supported rAthena version else this could fail.
 If you have problems ask here or in rAthena forum and please provide an error log.
@@ -82,12 +83,13 @@ $ sudo apt-get install screen
 $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 
-$ npm install -S discord.js
-
 $ mkdir bridge
 $ cd bridge
 
 $ cp ~/Ragnarok/rA_mods/discordbot/bridge/*.js* .
+
+$ npm install
+$ # Please ignore all "WARN" warnings for now!
 ```
 
 ## DISCORD PART

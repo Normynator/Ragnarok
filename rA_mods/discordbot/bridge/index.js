@@ -16,7 +16,7 @@ net.createServer(socket => {
     });
   })
   sockets.push(socket);
-}).listen(1337);
+}).listen(1337, "127.0.0.1");
 
 client.on('message', msg => {
   if (msg.channel.name == 'general' && !msg.author.bot) { // filter for text messages only
@@ -28,4 +28,4 @@ client.on('message', msg => {
   };
 })
 
-client.login('NDQzNjg0MjU1OTQ0NDA5MDg4.DigO4A.4Uw4NcA0fhPQkqtIycsJ053ucCw');
+client.login('TOKEN GOES HERE');
