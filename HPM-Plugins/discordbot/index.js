@@ -16,7 +16,7 @@ net.createServer(socket => {
     });
   })
   sockets.push(socket);
-}).listen(1337);
+}).listen(1337, "127.0.0.1");
 
 client.on('message', msg => {
   if (msg.channel.name == 'main' && !msg.author.bot) { // filter for text messages only
