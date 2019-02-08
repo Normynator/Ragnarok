@@ -8,6 +8,7 @@ class ThreadedServer(object):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind((self.host, self.port))
+        self.already_displayed = 0
 
     def listen(self):
         self.sock.listen(5)
@@ -18,21 +19,29 @@ class ThreadedServer(object):
         print("DLL connected to debug-server!")
 
     def listenToClient(self, client, address):
-        size = 1024
+        size = 1
         while True:
             try:
                 data = client.recv(size)
+                payload_size = 0
                 if data:
-                    # Set the response to echo back the recieved data 
-                    response = data
-                    print(response.decode('UTF-8')[:-1])
+                    payload_size = int.from_bytes(data, byteorder="little")
                 else:
                     raise Exception('client disconnected!')
+                if payload_size:
+                    data = client.recv(payload_size)
+                    try:
+                        print(data.decode('UTF-8'))
+                    except:
+                        if not self.already_displayed: 
+                            print("Message can't be displayed in UTF-8. This warning is displayed once, now silent!")
+                            self.already_displayed = 1
+                else:
+                    raise Exception('payload size failed!')
             except:
                 client.close()
                 self.listen()
                 return False
-
 
 
 if __name__ == "__main__":
