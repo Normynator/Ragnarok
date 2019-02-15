@@ -21,13 +21,19 @@
     <ClInclude Include="targetver.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="norm.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="debug_socket.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="detours.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="chat.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="client_ver.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="norm.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -42,6 +48,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="debug_socket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="chat.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

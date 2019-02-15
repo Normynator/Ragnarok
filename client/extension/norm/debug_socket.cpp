@@ -8,6 +8,7 @@
 #pragma comment (lib, "AdvApi32.lib")
 
 namespace norm_dll {
+
 debug_socket::debug_socket()
 {
 }
@@ -41,6 +42,7 @@ int debug_socket::do_send(const char* sendbuf)
 			return 1;
 		}
 	}
+	return 1;
 }
 
 int debug_socket::do_connect()

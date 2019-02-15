@@ -1,8 +1,11 @@
-#pragma once
+#ifndef debug_socket_h
+#define debug_socket_h
+#include "stdafx.h"
 #include <string>
 #include <winsock2.h>
 
 namespace norm_dll {
+
 class debug_socket
 {
 public:
@@ -18,5 +21,7 @@ private:
 	std::string	ip = "127.0.0.1";
 	SOCKET ConnectSocket = INVALID_SOCKET;
 };
+
 }
+#endif /* debug_socket_h */
 

@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 #include <memory>
-#include "norm.hpp"
+#include "norm.h"
 
 std::unique_ptr<norm_dll::norm> norm_ptr;
 
