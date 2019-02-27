@@ -1,0 +1,13 @@
+﻿  stdafx.cpp
+  chat.cpp
+c:\users\norm\source\repos\norm\norm\chat.cpp(54): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+c:\users\norm\source\repos\norm\norm\chat.cpp(89): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+  debug_socket.cpp
+c:\users\norm\source\repos\norm\norm\debug_socket.cpp(27): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "char", Datenverlust möglich
+  dllmain.cpp
+  norm.cpp
+  Code wird generiert...
+     Bibliothek "C:\Users\norm\source\repos\norm\Debug\norm.lib" und Objekt "C:\Users\norm\source\repos\norm\Debug\norm.exp" werden erstellt.
+detours.lib(detours.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(detours.obj)" oder an "C:\Users\norm\source\repos\norm\Debug\detours.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
+detours.lib(disasm.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(disasm.obj)" oder an "C:\Users\norm\source\repos\norm\Debug\detours.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
+  norm.vcxproj -> C:\Users\norm\source\repos\norm\Debug\norm.dll

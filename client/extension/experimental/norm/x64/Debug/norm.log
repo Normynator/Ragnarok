@@ -1,0 +1,34 @@
+﻿  stdafx.cpp
+  chat.cpp
+c:\users\norm\source\repos\norm\norm\chat.cpp(40): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(41): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(53): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+c:\users\norm\source\repos\norm\norm\chat.cpp(54): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(54): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "char *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(71): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "chat_hist"
+c:\users\norm\source\repos\norm\norm\chat.cpp(79): warning C4311: "Typumwandlung": Zeigerverkürzung von "HDC" zu "DWORD"
+c:\users\norm\source\repos\norm\norm\chat.cpp(79): warning C4302: "Typumwandlung": Verkürzung von "HDC" in "DWORD"
+c:\users\norm\source\repos\norm\norm\chat.cpp(80): warning C4311: "Typumwandlung": Zeigerverkürzung von "HDC" zu "DWORD"
+c:\users\norm\source\repos\norm\norm\chat.cpp(80): warning C4302: "Typumwandlung": Verkürzung von "HDC" in "DWORD"
+c:\users\norm\source\repos\norm\norm\chat.cpp(81): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(82): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(88): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+c:\users\norm\source\repos\norm\norm\chat.cpp(90): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(92): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(95): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "char *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(98): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "DWORD *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(98): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "char *"
+c:\users\norm\source\repos\norm\norm\chat.cpp(115): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "chat_input"
+c:\users\norm\source\repos\norm\norm\chat.cpp(136): warning C4312: "Typumwandlung": Konvertierung von "DWORD" in größeren Typ "UIWindowMgr_SendMsg"
+  debug_socket.cpp
+c:\users\norm\source\repos\norm\norm\debug_socket.cpp(27): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "char", Datenverlust möglich
+  dllmain.cpp
+  norm.cpp
+  Code wird generiert...
+chat.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol "DetourAttach" in Funktion ""void __cdecl chat_detour(class std::shared_ptr<class norm_dll::debug_socket>)" (?chat_detour@@YAXV?$shared_ptr@Vdebug_socket@norm_dll@@@std@@@Z)".
+norm.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol "DetourTransactionBegin" in Funktion ""public: void __cdecl norm_dll::norm::start(void)" (?start@norm@norm_dll@@QEAAXXZ)".
+norm.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol "DetourTransactionCommit" in Funktion ""public: void __cdecl norm_dll::norm::start(void)" (?start@norm@norm_dll@@QEAAXXZ)".
+norm.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol "DetourUpdateThread" in Funktion ""public: void __cdecl norm_dll::norm::start(void)" (?start@norm@norm_dll@@QEAAXXZ)".
+C:\Users\norm\source\repos\norm\norm\detours.lib : warning LNK4272: Bibliothekcomputertyp "x86" steht in Konflikt mit dem Zielcomputertyp "x64"
+detours.lib : warning LNK4272: Bibliothekcomputertyp "x86" steht in Konflikt mit dem Zielcomputertyp "x64"
+C:\Users\norm\source\repos\norm\x64\Debug\norm.dll : fatal error LNK1120: 4 nicht aufgelöste Externe
