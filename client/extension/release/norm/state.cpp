@@ -5,6 +5,7 @@
 namespace norm_dll {
 state::state()
 {
+	/* settings */
 #if CLIENT_VER == 20180620
 	g_session = 0x010130C8;
 	g_session_m_averagePingTime = g_session + 0x630;
@@ -15,7 +16,6 @@ state::state()
 	g_session_m_averagePingTime = g_session + 0x634;
 #endif
 }
-
 
 state::~state()
 {

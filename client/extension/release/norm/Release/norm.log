@@ -1,16 +1,11 @@
 ﻿  chat.cpp
-c:\users\norm\source\repos\norm_release\norm\chat.cpp(91): warning C4477: "sprintf_s": Die Formatzeichenfolge "%d" erfordert ein Argument vom Typ "int", das variadic-Argument "3" weist aber den Typ "void *" auf.
+c:\users\norm\source\repos\norm_release\norm\chat.cpp(90): warning C4477: "sprintf_s": Die Formatzeichenfolge "%d" erfordert ein Argument vom Typ "int", das variadic-Argument "3" weist aber den Typ "void *" auf.
   dllmain.cpp
   norm.cpp
   renderer_hook.cpp
   socket_hook.cpp
   state.cpp
+renderer_hook.obj : error LNK2005: "unsigned long DrawScene_func" (?DrawScene_func@@3KA) ist bereits in norm.obj definiert.
+renderer_hook.obj : error LNK2005: "unsigned long TextOutScreen_func" (?TextOutScreen_func@@3KA) ist bereits in norm.obj definiert.
      Bibliothek "C:\Users\norm\source\repos\norm_release\Release\norm.lib" und Objekt "C:\Users\norm\source\repos\norm_release\Release\norm.exp" werden erstellt.
-  Code wird generiert.
-  35 of 193 functions (18.1%) were compiled, the rest were copied from previous compilation.
-    3 functions were new in current compilation
-    5 functions had inline decision re-evaluated but remain unchanged
-  Codegenerierung ist abgeschlossen.
-detours.lib(detours.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(detours.obj)" oder an "C:\Users\norm\source\repos\norm_release\Release\detours.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-detours.lib(disasm.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(disasm.obj)" oder an "C:\Users\norm\source\repos\norm_release\Release\detours.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-  norm.vcxproj -> C:\Users\norm\source\repos\norm_release\Release\norm.dll
+C:\Users\norm\source\repos\norm_release\Release\norm.dll : fatal error LNK1169: Mindestens ein mehrfach definiertes Symbol gefunden.
