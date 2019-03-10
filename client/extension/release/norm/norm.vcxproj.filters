@@ -36,6 +36,15 @@
     <ClInclude Include="detours.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="socket_hook.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer_hook.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +60,15 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="debug_socket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="socket_hook.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer_hook.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="state.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

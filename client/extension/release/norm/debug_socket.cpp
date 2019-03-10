@@ -22,6 +22,10 @@ namespace norm_dll {
 	{
 	}
 
+	SOCKET* debug_socket::get_sock() {
+		return &ConnectSocket;
+	}
+
 	int debug_socket::do_send(const char* sendbuf)
 	{
 #ifndef DEBUG

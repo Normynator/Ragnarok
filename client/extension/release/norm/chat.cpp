@@ -1,15 +1,21 @@
 #include "stdafx.h"
+
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+
 #include "chat.h"
 #include <time.h>
 #include "detours.h"
+#include "state.h"
 
-/* debug */
-std::shared_ptr<norm_dll::debug_socket> dbg_sock;
+static std::shared_ptr<norm_dll::debug_socket> dbg_sock;
+static std::shared_ptr<norm_dll::state> c_state;
 
 /* global values */
 int welcome = 1;
 int catch_invalid_message = 0;
+int last_command = -1;
 int timestamp = 1;
+
 
 #if CLIENT_VER == 20180620
 #define CHAT_INPUT
@@ -30,8 +36,23 @@ signed int __fastcall chat_input_hook(void *this_obj, DWORD EDX, char *a2, int a
 #endif
 	chat_input original_chat_input = (chat_input)chat_input_func;
 
-	if (a2 && strcmp((char*)a2, "/timestamp") == 0) {
-		catch_invalid_message = 1;
+	if (a2) {
+		if (strcmp((char*)a2, "/timestamp") == 0) {
+			last_command = TIMESTAMP;
+			catch_invalid_message = 1;
+		}
+		else if (strcmp((char*)a2, "/pingo") == 0) {
+			last_command = PINGO;
+			catch_invalid_message = 1;
+		}
+		else if (strcmp((char*)a2, "/grid") == 0) {
+			last_command = GRID;
+			catch_invalid_message = 1;
+		}
+		else if (strcmp((char*)a2, "/drawitemtext") == 0) {
+			last_command = DIT;
+			catch_invalid_message = 1;
+		}
 	}
 
 	return original_chat_input(this_obj, a2, a3, a4);
@@ -80,20 +101,58 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 			welcome = 0;
 		}
 #endif
-		if (catch_invalid_message && (strcmp((char*)a2, "Invalid Command") == 0)) {
-			if (timestamp) {
-				timestamp = 0;
-				sprintf_s(tmp_buf, "Timestamp is now disabled!");
+		if (last_command != -1 && catch_invalid_message && (strcmp((char*)a2, "Invalid Command") == 0)) {
+			switch(last_command) {
+			case TIMESTAMP:
+				if (timestamp) {
+					timestamp = 0;
+					sprintf_s(tmp_buf, "Timestamp is now disabled!");
+				}
+				else {
+					timestamp = 1;
+					sprintf_s(tmp_buf, "Timestamp is now enabled!");
+				}
+				break;
+			case PINGO:
+				{
+					//init vars
+					c_state->m_width = *(ULONG*)(*(DWORD*)(c_state->g_renderer) + 0x24);
+					c_state->m_height = *(ULONG*)(*(DWORD*)(c_state->g_renderer) + 0x28);
+					sprintf_s(tmp_buf, "Width: %d | Height: %d", c_state->m_width, c_state->m_height);
+					dbg_sock->do_send("Pingo catched!");
+					c_state->display_ping = 1;
+				}
+				break;
+			case GRID:
+				if (c_state->display_grid) {
+					c_state->display_grid = 0;
+					sprintf_s(tmp_buf, "Grid is now disabled.");
+				}
+				else {
+					c_state->display_grid = 1;
+					sprintf_s(tmp_buf, "Grid is now enabled.");
+				}
+				break;
+			case DIT:
+			{
+				/*typedef void*(__thiscall *makewindow)(void*, int);
+				typedef int(__thiscall *UIFrameWnd__DrawItemText)(void*, int, int, int, int, int, int);
+				void* g_windowMgr = (void*)0x00e6ec88;
+				DWORD ret = *(DWORD*)((makewindow)0x711d20)(g_windowMgr, 12);
+				((UIFrameWnd__DrawItemText)(*(DWORD*)(ret + 0x88)))((void*)ret, 0, 0x19, 0, 0, 0, 0);
+				*/
 			}
-			else {
-				timestamp = 1;
-				sprintf_s(tmp_buf, "Timestamp is now enabled!");
+			break;
+			default:
+				sprintf_s(tmp_buf, "Norm: Command error, please report this.");
+				dbg_sock->do_send("Invalid switch case!");
 			}
 #if CLIENT_VER == 20150000
 			a2 = (int)&tmp_buf;
 #elif CLIENT_VER == 20180620
 			a2 = tmp_buf;
-#endif
+#endif		
+			last_command = -1;
 			catch_invalid_message = 0; // this only works if the client is not multithreaded.
 		}
 		// change the original message to include timestamp
@@ -114,11 +173,12 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 	return original_sendmsg(this_obj, a1, a2, a3, a4, a5);
 }
 
-void chat_detour(std::shared_ptr<norm_dll::debug_socket> dbg_sock_) {
+void chat_detour(std::shared_ptr<norm_dll::debug_socket> dbg_sock_, std::shared_ptr<norm_dll::state> state_) {
 	int err = 0;
 	int hook_count = 0;
 	char info_buf[256];
 	dbg_sock = dbg_sock_;
+	c_state = state_;
 
 #ifdef UIWindowMgr__SendMsg
 	err = DetourAttach(&(LPVOID&)UIWindowMgr_SendMsg_func, &UIWindowMgr_SendMsg_hook);
@@ -134,6 +194,6 @@ void chat_detour(std::shared_ptr<norm_dll::debug_socket> dbg_sock_) {
 	hook_count++;
 #endif
 
-	sprintf_s(info_buf, "Mods loaded: %d", hook_count);
+	sprintf_s(info_buf, "Chat mods loaded: %d", hook_count);
 	dbg_sock->do_send(info_buf);
 }

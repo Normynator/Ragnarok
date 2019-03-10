@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "debug_socket.h"
+#include "state.h"
 namespace norm_dll {
 
 	class norm {
@@ -12,5 +13,6 @@ namespace norm_dll {
 
 	private:
 		std::shared_ptr<debug_socket> dbg_sock;
+		std::shared_ptr<state> c_state;
 	};
 }

@@ -14,6 +14,7 @@ public:
 
 	int do_connect();
 	int do_send(const char* sendbuf);
+	SOCKET* get_sock();
 
 private:
 	std::string port = "1337";
