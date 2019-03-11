@@ -1,4 +1,6 @@
 #pragma once
+#include "debug_socket.h"
+
 /* This class contains all settings which are required for the DLL
  * to function correctly.
  * Client constants as g_session and g_renderer are set in the constructor.
@@ -22,8 +24,13 @@ public:
 	int display_ping = 0;
 	int display_grid = 0;
 
-	state();
+	state(std::shared_ptr<debug_socket>dbg_sock);
 	~state();
+
+	std::shared_ptr<debug_socket>dbg_sock;
+
+	void notify_stat_server();
+	bool already_notified = false;
 };
 }
 

@@ -67,7 +67,7 @@ namespace norm_dll {
 		// Initialize Winsock
 		iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 		if (iResult != 0) {
-			printf("WSAStartup failed with error: %d\n", iResult);
+			//printf("WSAStartup failed with error: %d\n", iResult);
 			return 1;
 		}
 
@@ -79,37 +79,28 @@ namespace norm_dll {
 		// Resolve the server address and port
 		iResult = getaddrinfo(this->ip.c_str(), this->port.c_str(), &hints, &result);
 		if (iResult != 0) {
-			printf("getaddrinfo failed with error: %d\n", iResult);
+			//printf("getaddrinfo failed with error: %d\n", iResult);
 			WSACleanup();
 			return 1;
 		}
 
-		// Attempt to connect to an address until one succeeds
-		for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
-
-			// Create a SOCKET for connecting to server
-			ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype,
+		ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype,
 				ptr->ai_protocol);
-			if (ConnectSocket == INVALID_SOCKET) {
-				printf("socket failed with error: %ld\n", WSAGetLastError());
-				WSACleanup();
-				return 1;
-			}
-
-			// Connect to server.
-			iResult = connect(this->ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
-			if (iResult == SOCKET_ERROR) {
-				closesocket(ConnectSocket);
-				ConnectSocket = INVALID_SOCKET;
-				continue;
-			}
-			break;
+		if (ConnectSocket == INVALID_SOCKET) {
+			//printf("socket failed with error: %ld\n", WSAGetLastError());
+			WSACleanup();
+			return 1;
 		}
 
-		freeaddrinfo(result);
+			// Connect to server.
+		iResult = connect(this->ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+		if (iResult == SOCKET_ERROR) {
+			closesocket(ConnectSocket);
+			ConnectSocket = INVALID_SOCKET;
+		}
 
 		if (ConnectSocket == INVALID_SOCKET) {
-			printf("Unable to connect to server!\n");
+			//printf("Unable to connect to server!\n");
 			WSACleanup();
 			return 1;
 		}

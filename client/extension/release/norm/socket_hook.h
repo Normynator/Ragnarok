@@ -5,5 +5,5 @@
 #include "state.h"
 #include <Windows.h>
 
-void socket_detour(std::shared_ptr<norm_dll::debug_socket> dbg_sock, std::shared_ptr<norm_dll::state> c_state);
+int socket_detour(std::shared_ptr<norm_dll::state> c_state);
 

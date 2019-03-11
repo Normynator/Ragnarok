@@ -8,7 +8,7 @@
 /* chat: contains all hooks related to the ingame chat system */
 
 /* hooks all available functions. */
-void chat_detour(std::shared_ptr<norm_dll::debug_socket> dbg_sock, std::shared_ptr<norm_dll::state> c_state);
+int chat_detour(std::shared_ptr<norm_dll::state> c_state);
 
 /* used for custom /commands. 
  * will be revoked when GetTalkType hook is implemented.

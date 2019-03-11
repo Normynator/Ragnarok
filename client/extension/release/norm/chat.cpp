@@ -7,7 +7,6 @@
 #include "detours.h"
 #include "state.h"
 
-static std::shared_ptr<norm_dll::debug_socket> dbg_sock;
 static std::shared_ptr<norm_dll::state> c_state;
 
 /* global values */
@@ -17,8 +16,8 @@ int last_command = -1;
 int timestamp = 1;
 
 
+#ifdef CHAT_INPUT
 #if CLIENT_VER == 20180620
-#define CHAT_INPUT
 DWORD chat_input_func = 0x00A0CF40;
 typedef int(__thiscall *chat_input)(void*, void*, int, int);
 
@@ -26,7 +25,6 @@ typedef int(__thiscall *chat_input)(void*, void*, int, int);
 int __fastcall chat_input_hook(void *this_obj, DWORD EDX, void* a2, int a3, int a4)
 {
 #elif CLIENT_VER == 20150000
-#define CHAT_INPUT
 DWORD chat_input_func = 0x00925100;
 typedef  signed int(__thiscall *chat_input)(void*, char*, int, char*);
 
@@ -57,12 +55,12 @@ signed int __fastcall chat_input_hook(void *this_obj, DWORD EDX, char *a2, int a
 
 	return original_chat_input(this_obj, a2, a3, a4);
 }
+#endif
 
+#ifdef UIWindowMgr__SendMsg
 #if CLIENT_VER == 20180620
-#define UIWindowMgr__SendMsg
 DWORD UIWindowMgr_SendMsg_func = 0x0071ED80;
 typedef int(__thiscall *UIWindowMgr_SendMsg)(void*, int, void*, void*, int, int);
-
 int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, void* a2, void* a3, int a4, int a5)
 
 #elif CLIENT_VER == 20150000
@@ -82,13 +80,13 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 	if (a1 == 1) {
 #ifdef DEBUG
 		// some testing -- begin
-		dbg_sock->do_send("UIWindowMgr_SendMsg: first arg was 1");
+		c_state->dbg_sock->do_send("UIWindowMgr_SendMsg: first arg was 1");
 		sprintf_s(buf, "UIWindowMgr_SendMsg: %s", (char*)a2);
-		dbg_sock->do_send(buf);
+		c_state->dbg_sock->do_send(buf);
 
 		if (strcmp((char*)a2, "Invalid Command") == 0) {
 			sprintf_s(buf, "UIWindowMgr_SendMsg: %d %s %d %d %d", a1, (char*)a2, a3, a4, a5);
-			dbg_sock->do_send(buf);
+			c_state->dbg_sock->do_send(buf);
 		}
 		// some testing -- end
 #endif
@@ -119,7 +117,7 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 					c_state->m_width = *(ULONG*)(*(DWORD*)(c_state->g_renderer) + 0x24);
 					c_state->m_height = *(ULONG*)(*(DWORD*)(c_state->g_renderer) + 0x28);
 					sprintf_s(tmp_buf, "Width: %d | Height: %d", c_state->m_width, c_state->m_height);
-					dbg_sock->do_send("Pingo catched!");
+					c_state->dbg_sock->do_send("Pingo catched!");
 					c_state->display_ping = 1;
 				}
 				break;
@@ -145,7 +143,7 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 			break;
 			default:
 				sprintf_s(tmp_buf, "Norm: Command error, please report this.");
-				dbg_sock->do_send("Invalid switch case!");
+				c_state->dbg_sock->do_send("Invalid switch case!");
 			}
 #if CLIENT_VER == 20150000
 			a2 = (int)&tmp_buf;
@@ -172,28 +170,30 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 	}
 	return original_sendmsg(this_obj, a1, a2, a3, a4, a5);
 }
+#endif
 
-void chat_detour(std::shared_ptr<norm_dll::debug_socket> dbg_sock_, std::shared_ptr<norm_dll::state> state_) {
+int chat_detour(std::shared_ptr<norm_dll::state> state_) {
 	int err = 0;
 	int hook_count = 0;
 	char info_buf[256];
-	dbg_sock = dbg_sock_;
 	c_state = state_;
 
 #ifdef UIWindowMgr__SendMsg
 	err = DetourAttach(&(LPVOID&)UIWindowMgr_SendMsg_func, &UIWindowMgr_SendMsg_hook);
 	CHECK(info_buf, err);
-	dbg_sock->do_send(info_buf);
+	c_state->dbg_sock->do_send(info_buf);
 	hook_count++;
 #endif
 
 #ifdef CHAT_INPUT
 	err = DetourAttach(&(LPVOID&)chat_input_func, &chat_input_hook);
 	CHECK(info_buf, err);
-	dbg_sock->do_send(info_buf);
+	c_state->dbg_sock->do_send(info_buf);
 	hook_count++;
 #endif
 
 	sprintf_s(info_buf, "Chat mods loaded: %d", hook_count);
-	dbg_sock->do_send(info_buf);
+	c_state->dbg_sock->do_send(info_buf);
+
+	return hook_count;
 }
