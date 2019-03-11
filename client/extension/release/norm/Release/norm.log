@@ -1,13 +1,9 @@
-﻿  chat.cpp
-c:\users\norm\source\repos\norm_release\norm\chat.cpp(88): warning C4477: "sprintf_s": Die Formatzeichenfolge "%d" erfordert ein Argument vom Typ "int", das variadic-Argument "3" weist aber den Typ "void *" auf.
-  norm.cpp
-  renderer_hook.cpp
-  socket_hook.cpp
+﻿  mod_statistics.cpp
      Bibliothek "C:\Users\norm\source\repos\norm_release\Release\norm.lib" und Objekt "C:\Users\norm\source\repos\norm_release\Release\norm.exp" werden erstellt.
   Code wird generiert.
-  30 of 189 functions (15.9%) were compiled, the rest were copied from previous compilation.
-    3 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  4 of 362 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
 detours.lib(detours.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(detours.obj)" oder an "C:\Users\norm\source\repos\norm_release\Release\detours.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
 detours.lib(disasm.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(disasm.obj)" oder an "C:\Users\norm\source\repos\norm_release\Release\detours.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.

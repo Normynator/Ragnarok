@@ -68,6 +68,7 @@ namespace norm_dll {
 		iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 		if (iResult != 0) {
 			//printf("WSAStartup failed with error: %d\n", iResult);
+			MessageBox(0, (LPCWSTR)"WSAStartup failed with error!", (LPCWSTR)"norm.dll error!", MB_OK);
 			return 1;
 		}
 
@@ -80,14 +81,17 @@ namespace norm_dll {
 		iResult = getaddrinfo(this->ip.c_str(), this->port.c_str(), &hints, &result);
 		if (iResult != 0) {
 			//printf("getaddrinfo failed with error: %d\n", iResult);
+			MessageBox(0, (LPCWSTR)"getaddrinfo failed with error!", (LPCWSTR)"norm.dll error!", MB_OK);
 			WSACleanup();
 			return 1;
 		}
 
+		ptr = result;
 		ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype,
 				ptr->ai_protocol);
 		if (ConnectSocket == INVALID_SOCKET) {
 			//printf("socket failed with error: %ld\n", WSAGetLastError());
+			MessageBox(0, (LPCWSTR)"socket failed with error!", (LPCWSTR)"norm.dll error!", MB_OK);
 			WSACleanup();
 			return 1;
 		}
@@ -101,6 +105,7 @@ namespace norm_dll {
 
 		if (ConnectSocket == INVALID_SOCKET) {
 			//printf("Unable to connect to server!\n");
+			MessageBox(0, (LPCWSTR)"Unable to connect to server!!", (LPCWSTR)"norm.dll error!", MB_OK);
 			WSACleanup();
 			return 1;
 		}

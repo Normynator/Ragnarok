@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\hooks">
+      <UniqueIdentifier>{926016f2-dfc1-4541-9606-f82cd1e3c05f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\hooks">
+      <UniqueIdentifier>{9549461b-c5b1-475d-b926-f6e481a5fa50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\mods">
+      <UniqueIdentifier>{157b1c39-2695-4e9e-a569-84f9ac1f133c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\mods">
+      <UniqueIdentifier>{0699d203-19c2-46cf-848f-af867d03631e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -24,9 +36,6 @@
     <ClInclude Include="norm.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="chat.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="debug_socket.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -36,14 +45,23 @@
     <ClInclude Include="detours.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="socket_hook.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="hook_chat.h">
+      <Filter>Headerdateien\hooks</Filter>
     </ClInclude>
-    <ClInclude Include="renderer_hook.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="hook_renderer.h">
+      <Filter>Headerdateien\hooks</Filter>
     </ClInclude>
-    <ClInclude Include="state.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="hook_socket.h">
+      <Filter>Headerdateien\hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="mod.h">
+      <Filter>Headerdateien\mods</Filter>
+    </ClInclude>
+    <ClInclude Include="mod_overlay.h">
+      <Filter>Headerdateien\mods</Filter>
+    </ClInclude>
+    <ClInclude Include="mod_statistics.h">
+      <Filter>Headerdateien\mods</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,20 +74,23 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="chat.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="debug_socket.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="socket_hook.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="hook_chat.cpp">
+      <Filter>Quelldateien\hooks</Filter>
     </ClCompile>
-    <ClCompile Include="renderer_hook.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="hook_renderer.cpp">
+      <Filter>Quelldateien\hooks</Filter>
     </ClCompile>
-    <ClCompile Include="state.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="hook_socket.cpp">
+      <Filter>Quelldateien\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="mod_overlay.cpp">
+      <Filter>Quelldateien\mods</Filter>
+    </ClCompile>
+    <ClCompile Include="mod_statistics.cpp">
+      <Filter>Quelldateien\mods</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
