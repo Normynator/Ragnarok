@@ -5,9 +5,11 @@
 #include "hook_chat.h"
 #include "hook_renderer.h"
 #include "hook_socket.h"
+#include "hook_session.h"
 
 #include "mod_overlay.h"
 #include "mod_statistics.h"
+#include "mod_timestamp.h"
 
 #include <winhttp.h>
 
@@ -40,6 +42,7 @@ void norm::install_mods()
 	// Disable a mod by commenting out the specific line.
 	INSTALL_MOD(overlay);
 	INSTALL_MOD(statistics);
+	INSTALL_MOD(timestamp);
 }
 
 void norm::start()
@@ -51,6 +54,7 @@ void norm::start()
 	int err = dbg_sock->do_connect();
 	if (err != 0) {
 		MessageBox(0, (LPCWSTR)"Unable to connect to the debug socket!", (LPCWSTR)"norm.dll error!", MB_OK);
+		dbg_sock->disabled = 1;
 	}
 	dbg_sock->do_send("Hello Debugger!");
 
@@ -63,20 +67,21 @@ void norm::start()
 	CHECK(info_buf, err);
 	dbg_sock->do_send(info_buf);
 
-	// attach hooks and share ownership of dbg_sock.
-	this->install_mods();
-
-	int total_mods = 0;
+	// attach hooks and install mods
+	int total_hooks = 0;
 	auto sptr = shared_from_this();
-	total_mods += chat_detour(sptr);
-	total_mods += socket_detour(sptr);
-	total_mods += renderer_detour(sptr);
+	total_hooks += chat_detour(sptr);
+	total_hooks += socket_detour(sptr);
+	total_hooks += renderer_detour(sptr);
+	total_hooks += session_detour(sptr);
+
+	this->install_mods();
 
 	err = DetourTransactionCommit();
 	CHECK(info_buf, err);
 	dbg_sock->do_send(info_buf);
 
-	sprintf_s(info_buf, "Total loaded mods: %d", total_mods);
+	sprintf_s(info_buf, "Total hooks available: %d", total_hooks);
 	dbg_sock->do_send(info_buf);
 }
 

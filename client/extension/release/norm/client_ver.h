@@ -12,5 +12,3 @@
 /* disable mods by undefining */
 #define COMENC	/* requires src edit to enable "encryption" on server side. */
 #define CHAT_INPUT
-#define UIWindowMgr__SendMsg
-#define TEXTOUTSCREEN

@@ -30,7 +30,10 @@ namespace norm_dll {
 	{
 #ifndef DEBUG
 		return 0;
-#endif
+#endif	
+		if (this->disabled)
+			return 0;
+
 		if (sendbuf) {
 			char len = strlen(sendbuf);
 			int res = send(ConnectSocket, &len, 1, 0);

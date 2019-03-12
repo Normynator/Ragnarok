@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "mod_statistics.h"
-#include "hook_renderer.h"
 #include <winhttp.h>
+
+#include "hook_renderer.h"
 
 statistics::statistics(norm_dll::norm* c_state) : mod(c_state)
 {
@@ -14,11 +15,13 @@ statistics::~statistics()
 void statistics::draw_scene(void* this_obj)
 {
 	//enable this to debug: dbg_sock->do_send("draw_scene of statistics was called!");
-	//this->notify_stat_server();
+	this->notify_stat_server();
 }
 
 void statistics::register_hooks() {
-	register_DrawScene_hook(shared_from_this());
+	int res = 0;
+	res += register_DrawScene_hook(shared_from_this());
+	this->validate(res, 1, __FILE__);
 }
 
 void statistics::notify_stat_server()

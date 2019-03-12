@@ -8,6 +8,7 @@ namespace norm_dll {
 class debug_socket
 {
 public:
+	int disabled = 0;
 	debug_socket();
 	debug_socket(std::string ip, std::string port);
 	virtual ~debug_socket();

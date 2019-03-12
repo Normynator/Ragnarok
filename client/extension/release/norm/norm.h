@@ -11,6 +11,7 @@ namespace norm_dll {
 		DWORD g_session;
 		DWORD g_session_m_averagePingTime;
 		DWORD g_renderer;
+		DWORD g_window_mgr = 0;
 
 		/* Screen height and width*/
 		ULONG m_width = -1;

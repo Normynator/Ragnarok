@@ -48,7 +48,7 @@ int socket_detour(std::shared_ptr<norm_dll::norm> state_) {
 	hook_count++;
 #endif
 
-	sprintf_s(info_buf, "Socket mods loaded: %d", hook_count);
+	sprintf_s(info_buf, "Socket hooks available: %d", hook_count);
 	c_state->dbg_sock->do_send(info_buf);
 
 	return hook_count;

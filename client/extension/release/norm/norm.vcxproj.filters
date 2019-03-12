@@ -63,6 +63,12 @@
     <ClInclude Include="mod_statistics.h">
       <Filter>Headerdateien\mods</Filter>
     </ClInclude>
+    <ClInclude Include="mod_timestamp.h">
+      <Filter>Headerdateien\mods</Filter>
+    </ClInclude>
+    <ClInclude Include="hook_session.h">
+      <Filter>Headerdateien\hooks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -94,6 +100,12 @@
     </ClCompile>
     <ClCompile Include="mod.cpp">
       <Filter>Quelldateien\mods</Filter>
+    </ClCompile>
+    <ClCompile Include="mod_timestamp.cpp">
+      <Filter>Quelldateien\mods</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_session.cpp">
+      <Filter>Quelldateien\hooks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

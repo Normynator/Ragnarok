@@ -8,9 +8,10 @@ public:
 	virtual ~overlay();
 	void draw_scene(void*);
 	void register_hooks();
+	int get_talk_type(void**, void**, int*, int*, int*);
 
 private:
-	bool display_ping = false;
-	bool display_grid = false;
+	int display_ping = 0;
+	int display_grid = 0;
 };
 
