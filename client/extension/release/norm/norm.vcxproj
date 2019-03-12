@@ -167,6 +167,7 @@
     <ClCompile Include="hook_chat.cpp" />
     <ClCompile Include="debug_socket.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="mod.cpp" />
     <ClCompile Include="mod_statistics.cpp" />
     <ClCompile Include="norm.cpp" />
     <ClCompile Include="hook_renderer.cpp" />

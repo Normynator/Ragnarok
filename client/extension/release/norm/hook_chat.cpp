@@ -7,6 +7,7 @@
 #include "detours.h"
 
 static std::shared_ptr<norm_dll::norm> c_state;
+static std::vector<std::shared_ptr<norm_dll::mod>> SendMsg_callbacks;
 
 /* global values */
 int welcome = 1;
@@ -117,18 +118,18 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 					c_state->m_height = *(ULONG*)(*(DWORD*)(c_state->g_renderer) + 0x28);
 					sprintf_s(tmp_buf, "Width: %d | Height: %d", c_state->m_width, c_state->m_height);
 					c_state->dbg_sock->do_send("Pingo catched!");
-					c_state->display_ping = 1;
+					//c_state->display_ping = 1;
 				}
 				break;
 			case GRID:
-				if (c_state->display_grid) {
+				/*if (c_state->display_grid) {
 					c_state->display_grid = 0;
 					sprintf_s(tmp_buf, "Grid is now disabled.");
 				}
 				else {
 					c_state->display_grid = 1;
 					sprintf_s(tmp_buf, "Grid is now enabled.");
-				}
+				}*/
 				break;
 			case DIT:
 			{
@@ -170,6 +171,11 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 	return original_sendmsg(this_obj, a1, a2, a3, a4, a5);
 }
 #endif
+
+int register_SendMsg_hook(std::shared_ptr<norm_dll::mod> mod_ptr) {
+	SendMsg_callbacks.push_back(mod_ptr);
+	return 0;
+}
 
 int chat_detour(std::shared_ptr<norm_dll::norm> state_) {
 	int err = 0;

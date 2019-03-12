@@ -92,5 +92,8 @@
     <ClCompile Include="mod_statistics.cpp">
       <Filter>Quelldateien\mods</Filter>
     </ClCompile>
+    <ClCompile Include="mod.cpp">
+      <Filter>Quelldateien\mods</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

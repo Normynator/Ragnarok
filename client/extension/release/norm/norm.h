@@ -19,8 +19,8 @@ namespace norm_dll {
 		/* Settings for renderer.
 		 * Draw if 1 else not.
 		 */
-		int display_ping = 0;
-		int display_grid = 0;
+		//int display_ping = 0;
+		//int display_grid = 0;
 
 		norm();
 		virtual ~norm();

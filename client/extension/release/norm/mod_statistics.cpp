@@ -3,7 +3,7 @@
 #include "hook_renderer.h"
 #include <winhttp.h>
 
-statistics::statistics(std::shared_ptr<norm_dll::debug_socket> dbg_sock_) : mod(dbg_sock_)
+statistics::statistics(norm_dll::norm* c_state) : mod(c_state)
 {
 }
 
@@ -14,7 +14,7 @@ statistics::~statistics()
 void statistics::draw_scene(void* this_obj)
 {
 	//enable this to debug: dbg_sock->do_send("draw_scene of statistics was called!");
-	this->notify_stat_server();
+	//this->notify_stat_server();
 }
 
 void statistics::register_hooks() {
