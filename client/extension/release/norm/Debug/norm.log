@@ -1,0 +1,14 @@
+﻿  chat.cpp
+c:\users\norm\source\repos\norm_release\norm\chat.cpp(91): warning C4477: "sprintf_s": Die Formatzeichenfolge "%d" erfordert ein Argument vom Typ "int", das variadic-Argument "3" weist aber den Typ "void *" auf.
+  debug_socket.cpp
+c:\users\norm\source\repos\norm_release\norm\debug_socket.cpp(35): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "char", Datenverlust möglich
+  dllmain.cpp
+  norm.cpp
+  renderer_hook.cpp
+  socket_hook.cpp
+  state.cpp
+  Code wird generiert...
+     Bibliothek "C:\Users\norm\source\repos\norm_release\Debug\norm.lib" und Objekt "C:\Users\norm\source\repos\norm_release\Debug\norm.exp" werden erstellt.
+detours.lib(detours.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(detours.obj)" oder an "C:\Users\norm\source\repos\norm_release\Debug\detours.pdb" gefunden; Objekt wird verkn³pft, als ob keine Debuginformationen vorhanden wõren.
+detours.lib(disasm.obj) : warning LNK4099: PDB "detours.pdb" wurde nicht mit "detours.lib(disasm.obj)" oder an "C:\Users\norm\source\repos\norm_release\Debug\detours.pdb" gefunden; Objekt wird verkn³pft, als ob keine Debuginformationen vorhanden wõren.
+  norm.vcxproj -> C:\Users\norm\source\repos\norm_release\Debug\norm.dll

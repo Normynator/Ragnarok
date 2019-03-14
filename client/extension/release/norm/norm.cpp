@@ -6,6 +6,7 @@
 #include "hook_renderer.h"
 #include "hook_socket.h"
 #include "hook_session.h"
+#include "hook_dx.h"
 
 #include "mod_overlay.h"
 #include "mod_statistics.h"
@@ -74,6 +75,7 @@ void norm::start()
 	total_hooks += socket_detour(sptr);
 	total_hooks += renderer_detour(sptr);
 	total_hooks += session_detour(sptr);
+	total_hooks += dx_detour(sptr);
 
 	this->install_mods();
 

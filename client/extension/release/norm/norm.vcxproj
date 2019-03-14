@@ -150,10 +150,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CProxyIDirect3D7.h" />
+    <ClInclude Include="CProxyIDirect3DDevice7.h" />
+    <ClInclude Include="CProxyIDirectDraw7.h" />
     <ClInclude Include="hook_chat.h" />
     <ClInclude Include="client_ver.h" />
     <ClInclude Include="debug_socket.h" />
     <ClInclude Include="detours.h" />
+    <ClInclude Include="hook_dx.h" />
     <ClInclude Include="hook_session.h" />
     <ClInclude Include="mod.h" />
     <ClInclude Include="mod_statistics.h" />
@@ -166,9 +170,13 @@
     <ClInclude Include="mod_timestamp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CProxyIDirect3D7.cpp" />
+    <ClCompile Include="CProxyIDirect3DDevice7.cpp" />
+    <ClCompile Include="CProxyIDirectDraw7.cpp" />
     <ClCompile Include="hook_chat.cpp" />
     <ClCompile Include="debug_socket.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="hook_dx.cpp" />
     <ClCompile Include="hook_session.cpp" />
     <ClCompile Include="mod.cpp" />
     <ClCompile Include="mod_statistics.cpp" />
@@ -183,6 +191,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="mod_timestamp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

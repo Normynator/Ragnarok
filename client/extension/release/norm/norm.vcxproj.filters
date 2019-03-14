@@ -25,6 +25,12 @@
     <Filter Include="Headerdateien\mods">
       <UniqueIdentifier>{0699d203-19c2-46cf-848f-af867d03631e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\hooks\hook_dx">
+      <UniqueIdentifier>{95d1ca25-7b9e-4968-9e0c-6649ca490b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\hooks\hook_dx">
+      <UniqueIdentifier>{c307a942-4c84-4317-8aae-580c7ad52441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -69,6 +75,18 @@
     <ClInclude Include="hook_session.h">
       <Filter>Headerdateien\hooks</Filter>
     </ClInclude>
+    <ClInclude Include="hook_dx.h">
+      <Filter>Headerdateien\hooks\hook_dx</Filter>
+    </ClInclude>
+    <ClInclude Include="CProxyIDirectDraw7.h">
+      <Filter>Headerdateien\hooks\hook_dx</Filter>
+    </ClInclude>
+    <ClInclude Include="CProxyIDirect3D7.h">
+      <Filter>Headerdateien\hooks\hook_dx</Filter>
+    </ClInclude>
+    <ClInclude Include="CProxyIDirect3DDevice7.h">
+      <Filter>Headerdateien\hooks\hook_dx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -107,5 +125,20 @@
     <ClCompile Include="hook_session.cpp">
       <Filter>Quelldateien\hooks</Filter>
     </ClCompile>
+    <ClCompile Include="hook_dx.cpp">
+      <Filter>Quelldateien\hooks\hook_dx</Filter>
+    </ClCompile>
+    <ClCompile Include="CProxyIDirectDraw7.cpp">
+      <Filter>Quelldateien\hooks\hook_dx</Filter>
+    </ClCompile>
+    <ClCompile Include="CProxyIDirect3D7.cpp">
+      <Filter>Quelldateien\hooks\hook_dx</Filter>
+    </ClCompile>
+    <ClCompile Include="CProxyIDirect3DDevice7.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
