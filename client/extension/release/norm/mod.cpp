@@ -5,10 +5,10 @@
 #include "hook_chat.h"
 
 
-void norm_dll::mod::no_override()
-{
-		c_state->dbg_sock->do_send("Missing function override.");
-}
+//void norm_dll::mod::no_override()
+//{
+//		c_state->dbg_sock->do_send("Missing function override.");
+//}
 
 void norm_dll::mod::print_to_chat(char * msg)
 {

@@ -17,9 +17,9 @@
 #pragma comment(lib, "winhttp.lib")
 
 // Installs a mod based on the classname.
-#define INSTALL_MOD(modname)	auto m_##modname = std::make_shared<modname>(this); \
-								m_##modname->register_hooks(); \
-								mods.push_back(m_##modname);
+#define INSTALL_MOD(modname)	mods.push_back(std::make_shared<modname>(this));//auto m_##modname = std::make_shared<modname>(this); \
+								/* m_##modname->register_hooks(); */ mods.push_back(m_##modname);
+								
 
 /* dll class */
 namespace norm_dll {

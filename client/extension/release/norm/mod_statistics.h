@@ -7,7 +7,7 @@ public:
 	statistics(norm_dll::norm* c_state);
 	virtual ~statistics();
 	void draw_scene(void*);
-	void register_hooks();
+	//void register_hooks();
 
 private:
 	void notify_stat_server();

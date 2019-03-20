@@ -8,7 +8,7 @@ public:
 	virtual ~timestamp();
 	void send_msg(void**, int*, void**, void**, int*, int*);
 	int get_talk_type(void**, void**, int*, int*, int*);
-	void register_hooks();
+	//void register_hooks();
 
 private:
 	int enabled = 1;

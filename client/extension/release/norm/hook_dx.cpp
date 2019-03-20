@@ -6,6 +6,7 @@
 #include "CProxyIDirectDraw7.h"
 
 static std::shared_ptr<norm_dll::norm> c_state;
+CProxyIDirectDraw7 *lpcDD;
 
 DWORD DirectDrawCreateEx_addr = 0x00A58D04;
 typedef HRESULT(WINAPI *pDirectDrawCreateEx)(GUID *lpGuid, LPVOID *lplpDD, const IID *const iid, IUnknown *pUnkOuter);
@@ -18,7 +19,6 @@ HRESULT WINAPI DirectDrawCreateEx_hook(GUID *lpGuid, LPVOID *lplpDD, const IID *
 	if (FAILED(Result))
 		return Result;
 
-	CProxyIDirectDraw7 *lpcDD;
 	*lplpDD = lpcDD = new CProxyIDirectDraw7((IDirectDraw7*)*lplpDD, c_state);
 	lpcDD->setThis(lpcDD);
 

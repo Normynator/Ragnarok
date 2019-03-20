@@ -1,13 +1,16 @@
 #pragma once
 #include "hook_dx.h"
+#include "CProxyIDirect3DDevice7.h"
 
 #define CLASSNAME "IDirect3D7"
 class CProxyIDirect3D7 : public IDirect3D7 {
 private:
 	IDirect3D7*			m_Instance;
 	std::shared_ptr<norm_dll::norm> c_state;
+	CProxyIDirect3DDevice7* pd3dd;
 public:
 	CProxyIDirect3D7(IDirect3D7* ptr, std::shared_ptr<norm_dll::norm> c_state) : c_state(c_state), m_Instance(ptr) {}
+	CProxyIDirect3DDevice7* getPD3DD() { return pd3dd; };
 
 	/*** IUnknown methods ***/
 	STDMETHOD(QueryInterface)(THIS_ REFIID p1, LPVOID * p2) PROXY2(QueryInterface)

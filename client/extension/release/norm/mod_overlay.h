@@ -7,7 +7,7 @@ public:
 	overlay(norm_dll::norm* c_state);
 	virtual ~overlay();
 	void draw_scene(void*);
-	void register_hooks();
+	//void register_hooks();
 	int get_talk_type(void**, void**, int*, int*, int*);
 
 private:

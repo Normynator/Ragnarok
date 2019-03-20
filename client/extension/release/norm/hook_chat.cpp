@@ -4,7 +4,7 @@
 #include "detours.h"
 
 static std::shared_ptr<norm_dll::norm> c_state;
-static std::vector<std::shared_ptr<norm_dll::mod>> SendMsg_callbacks;
+//static std::vector<std::shared_ptr<norm_dll::mod>> SendMsg_callbacks;
 
 bool SendMsg_detoured = false;
 
@@ -48,22 +48,23 @@ int __fastcall UIWindowMgr_SendMsg_hook(void* this_obj, DWORD EDX, int a1, int a
 */
 	if (c_state->g_window_mgr == 0 && a1 == 1)
 		c_state->g_window_mgr = (DWORD)this_obj;
-	for (auto callback : SendMsg_callbacks)
+	//for (auto callback : SendMsg_callbacks)
+	for (auto callback : c_state->mods)
 		callback->send_msg(&this_obj, &a1, &a2, &a3, &a4, &a5);
 
 	return original_sendmsg(this_obj, a1, a2, a3, a4, a5);
 }
 
-int register_SendMsg_hook(std::shared_ptr<norm_dll::mod> mod_ptr) {
+/*int register_SendMsg_hook(std::shared_ptr<norm_dll::mod> mod_ptr) {
 #ifdef SENDMSG
 	if (!SendMsg_detoured)
 		return 0;
-	SendMsg_callbacks.push_back(mod_ptr);
+	//SendMsg_callbacks.push_back(mod_ptr);
 	return 1;
 #else
 	return 0;
 #endif
-}
+}*/
 
 DWORD get_SendMsg_addr() {
 #if CLIENT_VER == 20180620

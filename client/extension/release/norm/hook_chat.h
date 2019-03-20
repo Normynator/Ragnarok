@@ -7,7 +7,7 @@
 
 /* chat: contains all hooks related to the ingame chat system */
 
-int register_SendMsg_hook(std::shared_ptr<norm_dll::mod> mod_ptr);
+//int register_SendMsg_hook(std::shared_ptr<norm_dll::mod> mod_ptr);
 
 /* hooks all available functions. */
 int chat_detour(std::shared_ptr<norm_dll::norm> c_state);

@@ -18,11 +18,11 @@ void statistics::draw_scene(void* this_obj)
 	this->notify_stat_server();
 }
 
-void statistics::register_hooks() {
+/*void statistics::register_hooks() {
 	int res = 0;
 	res += register_DrawScene_hook(shared_from_this());
 	this->validate(res, 1, __FILE__);
-}
+}*/
 
 void statistics::notify_stat_server()
 {

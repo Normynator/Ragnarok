@@ -4,7 +4,7 @@
 
 /* session: contains all hooks related to the ingame chat system */
 
-int register_GetTalkType_hook(std::shared_ptr<norm_dll::mod> mod_ptr);
+//int register_GetTalkType_hook(std::shared_ptr<norm_dll::mod> mod_ptr);
 
 /* hooks all available functions. */
 int session_detour(std::shared_ptr<norm_dll::norm> c_state);

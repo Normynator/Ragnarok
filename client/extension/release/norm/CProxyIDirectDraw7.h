@@ -1,5 +1,6 @@
 #pragma once
 #include "hook_dx.h"
+#include "CProxyIDirect3D7.h"
 
 #define CLASSNAME "IDirectDraw7"
 class CProxyIDirectDraw7 : public IDirectDraw7 {
@@ -9,6 +10,7 @@ private:
 	DWORD					PrimarySurfaceFlag;
 	IDirectDrawSurface7*	TargetSurface;
 	std::shared_ptr<norm_dll::norm> c_state;
+	CProxyIDirect3D7* pd3d;
 public:
 	static CProxyIDirectDraw7*    lpthis;
 
@@ -17,6 +19,7 @@ public:
 
 	static CProxyIDirectDraw7* getLPProxyIDirectDraw7(void) { return lpthis; };
 	void   setThis(CProxyIDirectDraw7* _lpthis) { lpthis = _lpthis; };
+	CProxyIDirect3D7* getPD3D() { return pd3d; };
 
 	/*** IUnknown methods ***/
 	STDMETHOD(QueryInterface) (THIS_ REFIID riid, LPVOID FAR * ppvObj)

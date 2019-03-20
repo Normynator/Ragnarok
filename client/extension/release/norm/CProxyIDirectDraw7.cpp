@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CProxyIDirectDraw7.h"
-#include "CProxyIDirect3D7.h"
+
 
 CProxyIDirectDraw7* CProxyIDirectDraw7::lpthis;
 
@@ -14,6 +14,7 @@ HRESULT CProxyIDirectDraw7::Proxy_QueryInterface(THIS_ REFIID riid, LPVOID FAR *
 			//LPVOID FAR * ppvObj_proxy;
 			ret_cProxy = new CProxyIDirect3D7((IDirect3D7*)*ppvObj, c_state);
 			*ppvObj = ret_cProxy;
+			this->pd3d = (CProxyIDirect3D7*)ret_cProxy;
 
 			return S_OK;
 		}

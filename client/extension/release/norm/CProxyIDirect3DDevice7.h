@@ -32,11 +32,11 @@ public:
 	STDMETHOD(GetCaps)(THIS_ LPD3DDEVICEDESC7 p1) PROXY1(GetCaps)
 	STDMETHOD(EnumTextureFormats)(THIS_ LPD3DENUMPIXELFORMATSCALLBACK p1, LPVOID p2) PROXY2(EnumTextureFormats)
 
-	STDMETHOD(BeginScene)(THIS) PROXY0(BeginScene)
-	//STDMETHOD(BeginScene)(THIS) { return Proxy_BeginScene(); };
+	//STDMETHOD(BeginScene)(THIS) PROXY0(BeginScene)
+	STDMETHOD(BeginScene)(THIS) { return Proxy_BeginScene(); };
 
-	STDMETHOD(EndScene)(THIS) PROXY0(EndScene)
-	//STDMETHOD(EndScene)(THIS) { return Proxy_EndScene(); };
+	//STDMETHOD(EndScene)(THIS) PROXY0(EndScene)
+	STDMETHOD(EndScene)(THIS) { return Proxy_EndScene(); };
 
 	STDMETHOD(GetDirect3D)(THIS_ LPDIRECT3D7* p1) PROXY1(GetDirect3D)
 	STDMETHOD(SetRenderTarget)(THIS_ LPDIRECTDRAWSURFACE7 p1, DWORD p2) PROXY2(SetRenderTarget)
@@ -90,7 +90,10 @@ public:
 	//
 	// Proxy Functions
 	//HRESULT Proxy_SetRenderState(THIS_ D3DRENDERSTATETYPE dwRenderStateType, DWORD dwRenderState);
-	//HRESULT Proxy_BeginScene(void);
-	//HRESULT Proxy_EndScene(void);
+	HRESULT Proxy_BeginScene(void);
+	HRESULT Proxy_EndScene(void);
+
+	void add_beginSecene_callback(std::shared_ptr<norm_dll::mod> cb);
+	void add_endSecene_callback(std::shared_ptr<norm_dll::mod> cb);
 };
 #undef CLASSNAME

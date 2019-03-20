@@ -32,10 +32,11 @@ namespace norm_dll {
 
 		//void notify_stat_server();
 		//bool already_notified = false;
+		std::vector<std::shared_ptr<mod>> mods;
 
 	private:
 		//std::shared_ptr<state> c_state;
 		void install_mods();
-		std::vector<std::shared_ptr<mod>> mods;
+		
 	};
 }

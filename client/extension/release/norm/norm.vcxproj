@@ -150,9 +150,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CacheInfo.h" />
     <ClInclude Include="CProxyIDirect3D7.h" />
     <ClInclude Include="CProxyIDirect3DDevice7.h" />
     <ClInclude Include="CProxyIDirectDraw7.h" />
+    <ClInclude Include="FastFont.h" />
     <ClInclude Include="hook_chat.h" />
     <ClInclude Include="client_ver.h" />
     <ClInclude Include="debug_socket.h" />
@@ -165,14 +167,17 @@
     <ClInclude Include="hook_renderer.h" />
     <ClInclude Include="hook_socket.h" />
     <ClInclude Include="mod_overlay.h" />
+    <ClInclude Include="SFastFont.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="mod_timestamp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CacheInfo.cpp" />
     <ClCompile Include="CProxyIDirect3D7.cpp" />
     <ClCompile Include="CProxyIDirect3DDevice7.cpp" />
     <ClCompile Include="CProxyIDirectDraw7.cpp" />
+    <ClCompile Include="FastFont.cpp" />
     <ClCompile Include="hook_chat.cpp" />
     <ClCompile Include="debug_socket.cpp" />
     <ClCompile Include="dllmain.cpp" />
@@ -184,6 +189,7 @@
     <ClCompile Include="hook_renderer.cpp" />
     <ClCompile Include="hook_socket.cpp" />
     <ClCompile Include="mod_overlay.cpp" />
+    <ClCompile Include="SFastFont.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

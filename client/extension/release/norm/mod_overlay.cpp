@@ -71,9 +71,9 @@ int overlay::get_talk_type(void **this_obj, void **src, int *a1, int *a2, int* r
 	return 0;
 }
 
-void overlay::register_hooks() {
+/*void overlay::register_hooks() {
 	int res = 0;
 	res += register_DrawScene_hook(shared_from_this());
 	res += register_GetTalkType_hook(shared_from_this());
 	this->validate(res, 2, __FILE__);
-}
+}*/

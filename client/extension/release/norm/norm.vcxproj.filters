@@ -31,6 +31,18 @@
     <Filter Include="Quelldateien\hooks\hook_dx">
       <UniqueIdentifier>{c307a942-4c84-4317-8aae-580c7ad52441}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\hooks\hook_dx\proxy">
+      <UniqueIdentifier>{f196bba0-f8b8-49b0-93aa-ce940b7291dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\hooks\hook_dx\proxy">
+      <UniqueIdentifier>{d30bfa28-9bcb-488d-8b46-617451ab6f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\hooks\hook_dx\fast_font">
+      <UniqueIdentifier>{d2062d0d-5946-4782-afd5-8cc8f2afc5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\hooks\hook_dx\fast_font">
+      <UniqueIdentifier>{6b6cd044-7119-4124-8b7e-15741a9dcd81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -78,14 +90,23 @@
     <ClInclude Include="hook_dx.h">
       <Filter>Headerdateien\hooks\hook_dx</Filter>
     </ClInclude>
-    <ClInclude Include="CProxyIDirectDraw7.h">
-      <Filter>Headerdateien\hooks\hook_dx</Filter>
-    </ClInclude>
     <ClInclude Include="CProxyIDirect3D7.h">
-      <Filter>Headerdateien\hooks\hook_dx</Filter>
+      <Filter>Headerdateien\hooks\hook_dx\proxy</Filter>
     </ClInclude>
     <ClInclude Include="CProxyIDirect3DDevice7.h">
-      <Filter>Headerdateien\hooks\hook_dx</Filter>
+      <Filter>Headerdateien\hooks\hook_dx\proxy</Filter>
+    </ClInclude>
+    <ClInclude Include="CProxyIDirectDraw7.h">
+      <Filter>Headerdateien\hooks\hook_dx\proxy</Filter>
+    </ClInclude>
+    <ClInclude Include="SFastFont.h">
+      <Filter>Headerdateien\hooks\hook_dx\fast_font</Filter>
+    </ClInclude>
+    <ClInclude Include="FastFont.h">
+      <Filter>Headerdateien\hooks\hook_dx\fast_font</Filter>
+    </ClInclude>
+    <ClInclude Include="CacheInfo.h">
+      <Filter>Headerdateien\hooks\hook_dx\fast_font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,14 +149,23 @@
     <ClCompile Include="hook_dx.cpp">
       <Filter>Quelldateien\hooks\hook_dx</Filter>
     </ClCompile>
-    <ClCompile Include="CProxyIDirectDraw7.cpp">
-      <Filter>Quelldateien\hooks\hook_dx</Filter>
-    </ClCompile>
     <ClCompile Include="CProxyIDirect3D7.cpp">
-      <Filter>Quelldateien\hooks\hook_dx</Filter>
+      <Filter>Quelldateien\hooks\hook_dx\proxy</Filter>
+    </ClCompile>
+    <ClCompile Include="CProxyIDirectDraw7.cpp">
+      <Filter>Quelldateien\hooks\hook_dx\proxy</Filter>
+    </ClCompile>
+    <ClCompile Include="CacheInfo.cpp">
+      <Filter>Quelldateien\hooks\hook_dx\fast_font</Filter>
+    </ClCompile>
+    <ClCompile Include="FastFont.cpp">
+      <Filter>Quelldateien\hooks\hook_dx\fast_font</Filter>
+    </ClCompile>
+    <ClCompile Include="SFastFont.cpp">
+      <Filter>Quelldateien\hooks\hook_dx\fast_font</Filter>
     </ClCompile>
     <ClCompile Include="CProxyIDirect3DDevice7.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\hooks\hook_dx\proxy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
