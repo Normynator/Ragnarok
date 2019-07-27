@@ -10,6 +10,14 @@
   "author": "Noil",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^11.3.2"
+    "discord.js": "github:discordjs/discord.js"
+  },
+  "devDependencies": {
+    "bufferutil": "^4.0.1",
+    "erlpack": "github:discordapp/erlpack",
+    "libsodium-wrappers": "^0.7.5",
+    "node-opus": "^0.3.2",
+    "opusscript": "0.0.6",
+    "sodium": "^3.0.2"
   }
 }
